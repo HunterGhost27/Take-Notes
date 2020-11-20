@@ -1,13 +1,14 @@
-# S7_Journal for Divinity: Original Sin 2 - Definitive Edition
+# S7_Journal 
+
+## Divinity: Original Sin 2 - Definitive Edition
 
 ----------
 
-@TODO - Basic Description Here
-
+Your own Journal.
 ## Releases
 
-* ***[Steam Workshop]()*** 
-* ***[Nexus]()***
+* ~~~***[Steam Workshop]()***~~~ 
+* ~~~***[Nexus]()***~~~
 
 ## Requirements
 
@@ -15,7 +16,7 @@
 
 ## Features
 
-* Feature 1
+* 🚧🚧Work-In-Progress🚧🚧
 
 ----------
 
