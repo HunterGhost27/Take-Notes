@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="e078e210-b9ba-48e5-afe3-c5eb91ba8545">
+  <stat_objects>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="BOOK_S7_JournalStat" />
+        <field name="Using" type="BaseClassStatObjectFieldDefinition" value="BOOK_Arx01" />
+        <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="df7a8779-f908-43ac-b0ba-cb49d16308a9" />
+        <field name="Value" type="IntegerStatObjectFieldDefinition" value="50" />
+        <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="6" enumeration_type_name="InventoryTabs" />
+        <field name="Unique" type="IntegerStatObjectFieldDefinition" value="1" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

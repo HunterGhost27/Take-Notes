@@ -1,0 +1,8 @@
+new entry "BOOK_S7_JournalStat"
+type "Object"
+using "BOOK_Arx01"
+data "RootTemplate" "df7a8779-f908-43ac-b0ba-cb49d16308a9"
+data "Value" "50"
+data "InventoryTab" "Misc"
+data "Unique" "1"
+
