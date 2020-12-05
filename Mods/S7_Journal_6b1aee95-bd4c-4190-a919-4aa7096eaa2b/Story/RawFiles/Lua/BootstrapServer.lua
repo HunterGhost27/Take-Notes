@@ -1,4 +1,12 @@
+--  ======
+--  IMPORT
+--  ======
+
 Ext.Require("S7_JournalAuxiliary.lua")
+
+--  ==============
+--  HANDLE JOURNAL
+--  ==============
 
 local function handleJournal_Server(character, template, itemGuid)
     if template ==  "BOOK_S7_Journal_df7a8779-f908-43ac-b0ba-cb49d16308a9" then

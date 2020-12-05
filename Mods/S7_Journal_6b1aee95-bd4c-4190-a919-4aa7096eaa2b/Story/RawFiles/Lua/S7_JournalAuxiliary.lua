@@ -1,6 +1,16 @@
+--  =================
 --  IMPORT DEPENDENCY
+--  =================
 
 UCL = Mods["S7_UI_Components_Library"]
+
+--  =============
+--  REMATERIALIZE
+--  =============
+
+function Rematerialize(element)
+    return Ext.JsonParse(Ext.JsonStringify(element))
+end
 
 --  =================================
 --      VALIDATE NON-EMPTY STRING
