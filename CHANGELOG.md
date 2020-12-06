@@ -2,6 +2,12 @@
 
 ----------
 
+## [0.2.0.0] --- 6th December 2020 --- **_UCL Integration_**
+
+### NEW
+
+* _Integrated_ with **UI Components Library**.
+* 
 ## [0.1.1.0] --- 20th November 2020 --- **_Journal Item Creation_**
 
 ### NEW

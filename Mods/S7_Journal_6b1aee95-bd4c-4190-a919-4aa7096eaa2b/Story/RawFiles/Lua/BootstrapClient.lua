@@ -4,12 +4,30 @@
 
 Ext.Require("S7_JournalAuxiliary.lua")
 
---  =========
---  VARIABLES
---  =========
+--  ======
+--  VARDEC
+--  ======
 
 Character = nil
-S7Journal = {}
+S7Journal = {
+    ["Component"] = {
+        ["Strings"] = {
+            ["caption"] = "Your Journal",
+            ["addCategory"] = "Add New Category",
+            ["addChapter"] = "Add New Chapter",
+            ["addParagraph"] = "Add New Paragraph",
+            ["editButtonCaption"] = "Toggle Edit Mode",
+            ["shareWithParty"] = "Share With Party"
+        }
+    },
+    ["SubComponents"] = {},
+    ["JournalData"] = {},
+    ["JournalMetaData"] = {
+        ["CategoryEntryMap"] = {},
+        ["ChapterEntryMap"] = {},
+        ["ParagraphEntryMap"] = {}
+    }
+}
 
 --  ============
 --  LOAD JOURNAL
@@ -17,28 +35,7 @@ S7Journal = {}
 
 function LoadJournal()
     local file = Ext.LoadFile("S7Journal.json") or ""
-    if ValidString(file) then S7Journal = Ext.JsonParse(file)
-    else
-        S7Journal = {
-            ["Component"] = {
-                ["Strings"] = {
-                    ["caption"] = "Your Journal",
-                    ["addCategory"] = "Add New Category",
-                    ["addChapter"] = "Add New Chapter",
-                    ["addParagraph"] = "Add New Paragraph",
-                    ["editButtonCaption"] = "Toggle Edit Mode",
-                    ["shareWithParty"] = "Share With Party"
-                }
-            },
-            ["SubComponents"] = {},
-            ["JournalData"] = {},
-            ["JournalMetaData"] = {
-                ["CategoryEntryMap"] = {},
-                ["ChapterEntryMap"] = {},
-                ["ParagraphEntryMap"] = {}
-            }
-        }
-    end
+    if ValidString(file) then S7Journal = Ext.JsonParse(file) end
 end
 
 --  ==============================================
@@ -50,9 +47,9 @@ Ext.RegisterListener("SessionLoaded", LoadJournal)
 --  ============
 
 function SaveJournal()
-    S7Journal.Component = UCL.UILibrary.GMJournal.Component
-    S7Journal.JournalMetaData = UCL.UILibrary.GMJournal.JournalMetaData
-    S7Journal.JournalData = UCL.UILibrary.GMJournal.JournalData
+    S7Journal.Component = Rematerialize(UCL.UILibrary.GMJournal.Component)
+    S7Journal.JournalMetaData = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData)
+    S7Journal.JournalData = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
     Ext.SaveFile("S7Journal.json", Ext.JsonStringify(S7Journal))
 end
 
