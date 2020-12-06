@@ -76,7 +76,7 @@ local function handleJournal_Client(channel, payload)
                 SaveJournal()
             end)
         else
-            UCL.UpdateJournal(S7Journal.JournalData)
+            UCL.UpdateJournal(Ext.JsonStringify(S7Journal.JournalData))
             UCL.UILibrary.GMJournal.UI:Show()
         end
         SaveJournal()
