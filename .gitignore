@@ -121,5 +121,5 @@ Thumbs.db
 #    #######################
 
 *.code-workspace
-
+.vscode
 
