@@ -7,7 +7,7 @@ assignees: Shresht7
 
 ---
 
-**Please describe your idea and how it will add to the mod's experience**
+**Please describe your idea and how it will add to the project's experience**
 A clear and concise description of what the idea is and what you want to achieve with it.
 
 **Describe alternatives you've considered**
