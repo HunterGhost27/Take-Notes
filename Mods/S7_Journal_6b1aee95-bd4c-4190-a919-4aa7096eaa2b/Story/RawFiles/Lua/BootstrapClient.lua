@@ -8,7 +8,7 @@ Ext.Require("S7_JournalAuxiliary.lua")
 --  VARDEC
 --  ======
 
-Character = nil
+Character = {}
 S7Journal = {
     ["Component"] = {
         ["Strings"] = {
@@ -38,25 +38,55 @@ S7Journal = {
 --  LOAD JOURNAL
 --  ============
 
-function LoadJournal()
+--      REQUEST CHARACTER INFO FROM SERVER
+--      ----------------------------------
+
+Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
+    local signal = Ext.JsonParse(stringifiedPayload)
+    if signal.ID == "S7_JournalServerReady" then
+        S7DebugPrint("Client Ready. Requesting CharacterInfo.", "BootstrapClient")
+        local request = {["ID"] = "RequestingCharacterInfo", ["Data"] = "RequestingCharacterInfo"}
+        Ext.PostMessageToServer("S7_Journal", Ext.JsonStringify(request))
+    end
+end)
+
+local function LoadJournal()
+    S7DebugPrint("Loading Journal File.", "BootstrapClient")
     local file = Ext.LoadFile("S7Journal.json") or ""
-    if ValidString(file) then S7Journal = Ext.JsonParse(file) end
+    if Character ~= nil and ValidString(file) then
+        S7Journal = Ext.JsonParse(file)[Character.userProfileID][Character.currentCharacter]
+    end
 end
 
---  ==============================================
-Ext.RegisterListener("SessionLoaded", LoadJournal)
---  ==============================================
+Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
+    local charInfoPayload = Ext.JsonParse(stringifiedPayload)
+    if charInfoPayload.ID == "RecieveCharacterInfo" then
+        Character = Rematerialize(charInfoPayload.Data)
+        LoadJournal()
+    end
+end)
 
 --  ============
 --  SAVE JOURNAL
 --  ============
 
 function SaveJournal()
+    S7DebugPrint("Saving Journal File.", "BootstrapClient")
+    local file = Ext.LoadFile("S7_Journal.json") or "{}"
+    local journal = Ext.JsonParse(file)
+
     S7Journal.Component = Rematerialize(UCL.UILibrary.GMJournal.Component)
     S7Journal.SubComponent = Rematerialize(UCL.UILibrary.GMJournal.SubComponent)
     S7Journal.JournalMetaData = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData)
     S7Journal.JournalData = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
-    Ext.SaveFile("S7Journal.json", Ext.JsonStringify(S7Journal))
+
+    if journal[Character.userProfileID] == nil or journal[Character.userProfileID][Character.currentCharacterName] == nil then
+        journal[Character.userProfileID] = {[Character.currentCharacterName] = {}}
+    end
+
+    journal[Character.userProfileID][Character.currentCharacterName] = Rematerialize(S7Journal)
+
+    Ext.SaveFile("S7Journal.json", Ext.JsonStringify(journal))
 end
 
 --  ##########################################################################################################################
@@ -65,17 +95,18 @@ end
 --  HANDLE JOURNAL
 --  ==============
 
-local function handleJournal_Client(channel, payload)
-    if channel == "S7_HandleJournal" then
-        local package = Ext.JsonParse(payload)
-        Character = package["1"]
+Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
+    local journalPayload = Ext.JsonParse(stringifiedPayload)
+    if journalPayload.ID == "CharacterOpenJournal" then
+        local package = journalPayload.Data
+        local character = package["1"]
         local tempate = package["2"]
         local itemGuid = package["3"]
 
         local BuildSpecs = {["GMJournal"] = Rematerialize(S7Journal)}
         if not UCL.UILibrary.GMJournal.Exists then
             UCL.UCLBuild(Ext.JsonStringify(BuildSpecs))
-            Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_UI_Journal_Hide", function (ui, call, ...)
+            Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
                 SaveJournal()
             end)
         else
@@ -84,8 +115,4 @@ local function handleJournal_Client(channel, payload)
         end
         SaveJournal()
     end
-end
-
---  =============================================================
-Ext.RegisterNetListener("S7_HandleJournal", handleJournal_Client)
---  =============================================================
+end)
