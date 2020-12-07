@@ -20,7 +20,12 @@ S7Journal = {
             ["shareWithParty"] = "Share With Party"
         }
     },
-    ["SubComponents"] = {},
+    ["SubComponent"] = {
+        ["ToggleEditButton"] = {
+            ["Title"] = "ToggleEditButton",
+            ["Visible"] = true
+        }
+    },
     ["JournalData"] = {},
     ["JournalMetaData"] = {
         ["CategoryEntryMap"] = {},
@@ -48,6 +53,7 @@ Ext.RegisterListener("SessionLoaded", LoadJournal)
 
 function SaveJournal()
     S7Journal.Component = Rematerialize(UCL.UILibrary.GMJournal.Component)
+    S7Journal.SubComponent = Rematerialize(UCL.UILibrary.GMJournal.SubComponent)
     S7Journal.JournalMetaData = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData)
     S7Journal.JournalData = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
     Ext.SaveFile("S7Journal.json", Ext.JsonStringify(S7Journal))
