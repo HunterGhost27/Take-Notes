@@ -4,7 +4,8 @@
 
 ----------
 
-Your own Journal.
+Your own personal **Journal**. Take _notes_, keep a record of _events_ and _characters_, and write about your _deeds_ (or _misdeeds_) as you adventure through Rivellon. Author the most comprehensive compendium of knowledge that transcends even Cranley Huwbert's! or just make a todo-list. _Create_, _View_, _Edit_ your journal-entries in-game or externally.
+
 ## Releases
 
 * ~~***[Steam Workshop]()***~~
@@ -14,10 +15,15 @@ Your own Journal.
 ## Requirements
 
 * ***[Script-Extender](https://github.com/Norbyte/ositools)***
+* ***[UI Components Library](https://github.com/Shresht7/UI-Components-Library)***
 
 ## Features
 
 * 🚧🚧Work-In-Progress🚧🚧
+
+* Maintain your own personal **Journal**.
+* _Create_, _View_, and _Edit_ your journal-entries from the in-game UI or _Export_ them to edit externally.
+* Each _Character_ per _UserProfile_ has their unique journal.  
 
 ----------
 
