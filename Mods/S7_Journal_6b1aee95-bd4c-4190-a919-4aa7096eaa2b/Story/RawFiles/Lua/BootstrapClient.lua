@@ -52,9 +52,9 @@ end)
 
 local function LoadJournal()
     S7DebugPrint("Loading Journal File.", "BootstrapClient")
-    local file = Ext.LoadFile("S7Journal.json") or ""
-    if Character ~= nil and ValidString(file) then
-        S7Journal = Ext.JsonParse(file)[Character.hostUserProfileID][Character.currentCharacter]
+    local file = Ext.JsonParse(Ext.LoadFile("S7Journal.json") or "{}")
+    if Character ~= nil and file[Character.hostUserProfileID] ~= nil and file[Character.hostUserProfileID][Character.currentCharacterName] ~= nil then
+        S7Journal = file[Character.hostUserProfileID][Character.currentCharacterName]
     end
 end
 
@@ -72,7 +72,7 @@ end)
 
 function SaveJournal()
     S7DebugPrint("Saving Journal File.", "BootstrapClient")
-    local file = Ext.LoadFile("S7_Journal.json") or "{}"
+    local file = Ext.LoadFile("S7Journal.json") or "{}"
     local journal = Ext.JsonParse(file)
 
     S7Journal.Component = Rematerialize(UCL.UILibrary.GMJournal.Component)
@@ -83,7 +83,7 @@ function SaveJournal()
     if journal[Character.hostUserProfileID] == nil then
         journal[Character.hostUserProfileID] = {}
         if journal[Character.hostUserProfileID][Character.currentCharacterName] == nil then
-            journal[Character.hostUserProfileID] = {[Character.currentCharacterName] = {}}
+            journal[Character.hostUserProfileID][Character.currentCharacterName] = {}
         end
     end
 
