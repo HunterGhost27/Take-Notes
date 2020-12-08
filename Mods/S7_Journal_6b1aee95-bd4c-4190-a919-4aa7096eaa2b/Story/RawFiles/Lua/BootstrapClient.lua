@@ -60,7 +60,7 @@ end
 
 Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
     local charInfoPayload = Ext.JsonParse(stringifiedPayload)
-    if charInfoPayload.ID == "RecieveCharacterInfo" then
+    if charInfoPayload.ID == "ProvidingCharacterInfo" then
         Character = Rematerialize(charInfoPayload.Data)
         LoadJournal()
     end
@@ -80,8 +80,11 @@ function SaveJournal()
     S7Journal.JournalMetaData = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData)
     S7Journal.JournalData = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
 
-    if journal[Character.userProfileID] == nil or journal[Character.userProfileID][Character.currentCharacterName] == nil then
-        journal[Character.userProfileID] = {[Character.currentCharacterName] = {}}
+    if journal[Character.userProfileID] == nil then
+        journal[Character.userProfileID] = {}
+        if journal[Character.userProfileID][Character.currentCharacterName] == nil then
+            journal[Character.userProfileID] = {[Character.currentCharacterName] = {}}
+        end
     end
 
     journal[Character.userProfileID][Character.currentCharacterName] = Rematerialize(S7Journal)
