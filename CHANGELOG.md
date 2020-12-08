@@ -9,6 +9,10 @@
 * _Integrated_ with **UI Components Library**.
 * _Created_ *ModVersioning* script.
 * _Account_ for different `characters` and `userIDs`.
+
+### CHANGED
+
+* Use the Host's Character ProfileID instead of Client's.
 ## [0.1.1.0] --- 20th November 2020 --- **_Journal Item Creation_**
 
 ### NEW

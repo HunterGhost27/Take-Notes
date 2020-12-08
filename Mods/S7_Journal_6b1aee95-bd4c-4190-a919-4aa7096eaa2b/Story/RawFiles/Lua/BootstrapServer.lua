@@ -32,6 +32,7 @@ local function FetchPlayers()
             ["userID"] = user,
             ["userName"] = Osi.GetUserName(user),
             ["userProfileID"] = Osi.GetUserProfileID(user),
+            ["hostUserProfileID"] = Osi.GetUserProfileID(Osi.CharacterGetReservedUserID(Osi.CharacterGetHostCharacter())),
             ["currentCharacter"] = Osi.GetCurrentCharacter(user),
             ["currentCharacterName"] = characterName
         }
@@ -48,6 +49,7 @@ local function FetchPlayers()
         ["currentCharacter"] = Osi.GetCurrentCharacter(hostUserID),
         ["currentCharacterName"] = hostCharacterName
     }
+    S7DebugPrint("Built CharacterInfo Table.", "BootstrapServer")
 end
 
 --  ===============================================================
