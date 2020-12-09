@@ -25,7 +25,7 @@ Your own personal **Journal**. Take _notes_, keep a record of _events_ and _char
 * _Create_, _View_, and _Edit_ your journal-entries from the in-game UI or _Export_ them to edit externally.
 * Each _Character_ per _UserProfile_ has their unique journal.  
 
-![Journal](https://i.imgur.com/8QH29mn.png)
+![Journal](https://imgur.com/tHcOoGF.png)
 
 ----------
 
