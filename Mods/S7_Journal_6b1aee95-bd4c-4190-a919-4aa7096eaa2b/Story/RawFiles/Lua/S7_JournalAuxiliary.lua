@@ -21,7 +21,7 @@ function S7DebugPrint(...)
         if Ext.IsClient() then context = "C"
         elseif Ext.IsServer() then context = "S" end
 
-        local logFunctions = {["Log"] = Ext.Print, ["Warning"] = Ext.Warning, ["Error"] = Ext.Error}
+        local logFunctions = {["Log"] = Ext.Print, ["Warning"] = Ext.PrintWarning, ["Error"] = Ext.PrintError}
         local printFunction = logFunctions[logType]
 
         local displayString = "[" .. IDENTIFIER .. ":Lua(" .. context .. "):" .. logSource .. "] --- " .. logMsg
@@ -37,7 +37,7 @@ end
 --  ===============
 
 CENTRAL = {}    --  Holds Global Settings and Information
-local file = Ext.LoadFile("S7Central.json") or ""
+local file = Ext.LoadFile("S7Central.json") or "{}"
 if file ~= nil and file ~= "" then CENTRAL = Ext.JsonParse(file) end
 if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = {} end
 
