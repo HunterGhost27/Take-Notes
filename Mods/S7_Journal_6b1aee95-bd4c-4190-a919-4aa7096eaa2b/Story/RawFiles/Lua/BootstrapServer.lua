@@ -4,84 +4,67 @@
 
 Ext.Require("S7_JournalAuxiliary.lua")
 
---  =================
---  FETCH PLAYER DATA
---  =================
+--  ======
+--  VARDEC
+--  ======
 
-CharacterInfo = {
-    ["clientCharacters"] = {}, -- Information about all clients
-    ["hostCharacter"] = {} -- Information about host
-}
-
-local function FetchPlayers()
-
-    --  CLIENT CHARACTERS
-    --  -----------------
-    local count = 1
-    local tempUsers = {} --  Temporary table.
-    for _, player in ipairs(Osi.DB_IsPlayer:Get(nil)[1] or {}) do --  Extract Player CharacterGUIDs
-        tempUsers[count] = Osi.CharacterGetReservedUserID(player) --  Get UserIDs
-        count = count + 1
-    end
-
-    for _, user in ipairs(tempUsers) do -- Iterate over all active characters
-        local userProfileID = Osi.GetUserProfileID(user) -- Get User's ProfileID
-        local _, characterName = Osi.CharacterGetDisplayName(Osi.GetCurrentCharacter(user)) -- Get Controlled Character's DisplayName
-        -- Build ClientCharacter table.
-        CharacterInfo.clientCharacters[userProfileID] = {
-            ["userID"] = user,
-            ["userName"] = Osi.GetUserName(user),
-            ["userProfileID"] = Osi.GetUserProfileID(user),
-            ["hostUserProfileID"] = Osi.GetUserProfileID(Osi.CharacterGetReservedUserID(Osi.CharacterGetHostCharacter())),
-            ["currentCharacter"] = Osi.GetCurrentCharacter(user),
-            ["currentCharacterName"] = characterName
+local function ReinitJournal()
+    S7Journal = {
+        ["Component"] = {
+            ["Strings"] = {
+                ["caption"] = "Your Journal",
+                ["addCategory"] = "Add New Category",
+                ["addChapter"] = "Add New Chapter",
+                ["addParagraph"] = "Add New Paragraph",
+                ["editButtonCaption"] = "TOGGLE EDIT MODE",
+                ["shareWithParty"] = "Share With Party"
+            }
+        },
+        ["SubComponent"] = {
+            ["ToggleEditButton"] = {
+                ["Title"] = "ToggleEditButton",
+                ["Visible"] = true
+            }
+        },
+        ["JournalData"] = {},
+        ["JournalMetaData"] = {
+            ["CategoryEntryMap"] = {},
+            ["ChapterEntryMap"] = {},
+            ["ParagraphEntryMap"] = {}
         }
-    end
-    --  HOST CHARACTER
-    --  --------------
-    local hostUserID = Osi.CharacterGetReservedUserID(Osi.CharacterGetHostCharacter()) -- Get Host Character's UserID
-    local _, hostCharacterName = Osi.CharacterGetDisplayName(Osi.GetCurrentCharacter(hostUserID)) -- Host Character's DisplayName
-    --   Build Host Character's table.
-    CharacterInfo.hostCharacter = {
-        ["hostUserID"] = hostUserID,
-        ["hostUserName"] = Osi.GetUserName(hostUserID),
-        ["hostProfileID"] = Osi.GetUserProfileID(hostUserID),
-        ["currentCharacter"] = Osi.GetCurrentCharacter(hostUserID),
-        ["currentCharacterName"] = hostCharacterName
     }
-    S7DebugPrint("Built CharacterInfo Table.", "BootstrapServer")
+    S7DebugPrint("Reinitializing S7Journal", "BootstrapServer")
+    end
+    ReinitJournal()
+
+--  ####################################################################################################################################################
+
+--  ============
+--  LOAD JOURNAL
+--  ============
+
+local function LoadJournal(itemGUID)
+    local fileName = IDENTIFIER .. "/" .. tostring(itemGUID) .. ".json"
+    S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapClient")
+    local file = Ext.LoadFile(fileName) or "{}"
+    if ValidString(file) then
+        S7Journal = Ext.JsonParse(file)
+        S7DebugPrint("Loaded ".. fileName .. " Successfully", "BootstrapClient")
+    else
+        ReinitJournal()
+    end
 end
 
---  ===============================================================
-Ext.RegisterOsirisListener("GameStarted", 2, "after", FetchPlayers)
---  ===============================================================
+--  ============
+--  SAVE JOURNAL
+--  ============
 
---  ======================
---  BROADCAST SERVER READY
---  ======================
-
-Ext.RegisterOsirisListener("GameStarted", 2, "after", function()
-    S7DebugPrint("Server Ready.", "BootstrapServer")
-    local signal = {["ID"] = "S7_JournalServerReady", ["Data"] = "S7_JournalServerReady"}
-    Ext.BroadcastMessage("S7_Journal", Ext.JsonStringify(signal))
-end)
-
---  ==================================
---  RESPOND TO CHARACTER-INFO REQUESTS
---  ==================================
-
-Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
-    local charInfoRequest = Ext.JsonParse(stringifiedPayload)
-    if charInfoRequest.ID == "RequestingCharacterInfo" then
-        FetchPlayers()
-        if Ext.OsirisIsCallable() then
-            for _, player in ipairs(Osi.DB_IsPlayer:Get(nil)[1]) do
-                S7DebugPrint("Dispatching CharacterInfo to " .. player, "BootstrapServer")
-                local userProfileID = Osi.GetUserProfileID(Osi.CharacterGetReservedUserID(player))
-                local package = {["ID"] = "ProvidingCharacterInfo", ["Data"] = CharacterInfo.clientCharacters[userProfileID]}
-                Ext.PostMessageToClient(player, "S7_Journal", Ext.JsonStringify(package))
-            end
-        end
+Ext.RegisterNetListener("S7_Journal", function (channel, payload)
+    local journal = Ext.JsonParse(payload)
+    if journal.ID == "SaveJournal" then
+        S7DebugPrint("Saving Journal File.", "BootstrapServer")
+        Ext.SaveFile(IDENTIFIER .. "/" .. journal.fileName .. ".json", Ext.JsonStringify(journal.Data))
+        S7DebugPrint("Saved " .. journal.fileName, "BootstrapServer")
     end
 end)
 
@@ -92,18 +75,14 @@ end)
 Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function (character, template, itemGuid)
     if template == JournalTemplate then
         S7DebugPrint(character .. " opened Journal.", "BootstrapServer")
-        local package = table.pack(character, template, itemGuid)
-        local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = Rematerialize(package)}
+        LoadJournal(itemGuid)
+        local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = itemGuid, ["content"] = Rematerialize(S7Journal)}}
         Ext.PostMessageToClient(character, "S7_Journal", Ext.JsonStringify(payload))
     end
 end)
 
---  =====================
---  ADD TO HOST CHARACTER
---  =====================
+--  ==================
+--  REQUIRE DEBUG MODE
+--  ==================
 
-Ext.RegisterOsirisListener("SavegameLoaded", 4, "after", function ()
-    if Osi.ItemTemplateIsInCharacterInventory(Osi.CharacterGetHostCharacter(), JournalTemplate) < 1 then
-        Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
-    end
-end)
+if Ext.IsDeveloperMode() then Ext.Require("S7_DebugMode.lua") end

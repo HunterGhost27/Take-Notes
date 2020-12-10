@@ -2,6 +2,12 @@
 
 ----------
 
+## [0.2.1.0] --- 10th December 2020 --- **_Item-Bound-Content_**
+
+### CHANGED
+
+* _Revamped_ the entire code inorder to tie the journal content to items instead of characters.
+
 ## [0.2.0.0] --- 7th December 2020 --- **_UCL Integration_**
 
 ### NEW
