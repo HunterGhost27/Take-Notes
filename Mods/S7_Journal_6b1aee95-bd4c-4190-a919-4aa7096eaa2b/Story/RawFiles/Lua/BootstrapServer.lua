@@ -59,7 +59,7 @@ end
 --  SAVE JOURNAL
 --  ============
 
-Ext.RegisterNetListener("S7_Journal", function (channel, payload)
+Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
         S7DebugPrint("Saving Journal File.", "BootstrapServer")
@@ -77,7 +77,7 @@ Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function (ch
         S7DebugPrint(character .. " opened Journal.", "BootstrapServer")
         LoadJournal(itemGuid)
         local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = itemGuid, ["content"] = Rematerialize(S7Journal)}}
-        Ext.PostMessageToClient(character, "S7_Journal", Ext.JsonStringify(payload))
+        Ext.PostMessageToClient(character, IDENTIFIER, Ext.JsonStringify(payload))
     end
 end)
 

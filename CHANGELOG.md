@@ -7,6 +7,7 @@
 ### CHANGED
 
 * _Revamped_ the entire code inorder to tie the journal content to items instead of characters.
+* Channel names now reference `IDENTIFIER`.
 
 ## [0.2.0.0] --- 7th December 2020 --- **_UCL Integration_**
 

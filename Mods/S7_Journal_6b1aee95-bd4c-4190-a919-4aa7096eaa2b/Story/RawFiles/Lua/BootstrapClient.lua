@@ -19,14 +19,14 @@ local function SaveJournal(fileName)
             ["JournalData"] = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
         }
     }
-    Ext.PostMessageToServer("S7_Journal", Ext.JsonStringify(journal))
+    Ext.PostMessageToServer(IDENTIFIER, Ext.JsonStringify(journal))
 end
 
 --  ==============
 --  HANDLE JOURNAL
 --  ==============
 
-Ext.RegisterNetListener("S7_Journal", function (channel, payload)
+Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "CharacterOpenJournal" then
         S7DebugPrint("Dispatching BuildSpecs to UI-Components-Library.", "BootstrapClient")
