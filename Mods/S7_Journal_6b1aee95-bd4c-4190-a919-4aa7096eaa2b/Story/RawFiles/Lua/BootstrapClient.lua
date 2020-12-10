@@ -16,7 +16,7 @@ S7Journal = {
             ["addCategory"] = "Add New Category",
             ["addChapter"] = "Add New Chapter",
             ["addParagraph"] = "Add New Paragraph",
-            ["editButtonCaption"] = "Toggle Edit Mode",
+            ["editButtonCaption"] = "TOGGLE EDIT MODE",
             ["shareWithParty"] = "Share With Party"
         }
     },
@@ -51,10 +51,12 @@ Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
 end)
 
 local function LoadJournal()
+    local file = {}
     S7DebugPrint("Loading Journal File.", "BootstrapClient")
-    local file = Ext.JsonParse(Ext.LoadFile("S7Journal.json") or "{}")
-    if Character ~= nil and file[Character.hostUserProfileID] ~= nil and file[Character.hostUserProfileID][Character.currentCharacterName] ~= nil then
-        S7Journal = file[Character.hostUserProfileID][Character.currentCharacterName]
+    if Character ~= nil then
+        local fileName = "S7Journal/" .. tostring(Character.hostUserProfileID) .. "/" .. tostring(Character.currentCharacterName) .. ".json"
+        file = Ext.JsonParse(Ext.LoadFile(fileName) or "{}")
+        S7Journal = file
     end
 end
 
@@ -72,24 +74,17 @@ end)
 
 function SaveJournal()
     S7DebugPrint("Saving Journal File.", "BootstrapClient")
-    local file = Ext.LoadFile("S7Journal.json") or "{}"
-    local journal = Ext.JsonParse(file)
+    local fileName = "S7Journal/" .. tostring(Character.hostUserProfileID) .. "/" .. tostring(Character.currentCharacterName) .. ".json"
+    local journal = Ext.JsonParse(Ext.LoadFile(fileName) or "{}")
 
     S7Journal.Component = Rematerialize(UCL.UILibrary.GMJournal.Component)
     S7Journal.SubComponent = Rematerialize(UCL.UILibrary.GMJournal.SubComponent)
     S7Journal.JournalMetaData = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData)
     S7Journal.JournalData = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
 
-    if journal[Character.hostUserProfileID] == nil then
-        journal[Character.hostUserProfileID] = {}
-        if journal[Character.hostUserProfileID][Character.currentCharacterName] == nil then
-            journal[Character.hostUserProfileID][Character.currentCharacterName] = {}
-        end
-    end
+    journal = Rematerialize(S7Journal)
 
-    journal[Character.hostUserProfileID][Character.currentCharacterName] = Rematerialize(S7Journal)
-
-    Ext.SaveFile("S7Journal.json", Ext.JsonStringify(journal))
+    Ext.SaveFile(fileName, Ext.JsonStringify(journal))
 end
 
 --  ##########################################################################################################################
@@ -106,14 +101,14 @@ Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
         local tempate = package["2"]
         local itemGuid = package["3"]
 
+        LoadJournal()
         local BuildSpecs = {["GMJournal"] = Rematerialize(S7Journal)}
+        UCL.UCLBuild(Ext.JsonStringify(BuildSpecs))
         if not UCL.UILibrary.GMJournal.Exists then
-            UCL.UCLBuild(Ext.JsonStringify(BuildSpecs))
             Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
                 SaveJournal()
             end)
         else
-            UCL.UpdateJournal(Ext.JsonStringify(S7Journal.JournalData))
             UCL.UILibrary.GMJournal.UI:Show()
         end
         SaveJournal()

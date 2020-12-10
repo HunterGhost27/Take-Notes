@@ -64,7 +64,7 @@ local function ModUpdater(prevVersion, currVersion, forceUpdate)
 
     if isUpdatedRequired or forceUpdate then
         S7DebugPrint("Updating " .. IDENTIFIER .. ": " .. ParseVersion(prevVersion, "string") .. " --> " .. ParseVersion(currVersion, "string"), "ModVersioning", "Log", true, true)
-    else
+        --  DO UPDATE STUFF
     end
 end
 

@@ -74,11 +74,13 @@ Ext.RegisterNetListener("S7_Journal", function (channel, stringifiedPayload)
     local charInfoRequest = Ext.JsonParse(stringifiedPayload)
     if charInfoRequest.ID == "RequestingCharacterInfo" then
         FetchPlayers()
-        for _, player in ipairs(Osi.DB_IsPlayer:Get(nil)[1]) do
-            S7DebugPrint("Dispatching CharacterInfo to " .. player, "BootstrapServer")
-            local userProfileID = Osi.GetUserProfileID(Osi.CharacterGetReservedUserID(player))
-            local package = {["ID"] = "ProvidingCharacterInfo", ["Data"] = CharacterInfo.clientCharacters[userProfileID]}
-            Ext.PostMessageToClient(player, "S7_Journal", Ext.JsonStringify(package))
+        if Ext.OsirisIsCallable() then
+            for _, player in ipairs(Osi.DB_IsPlayer:Get(nil)[1]) do
+                S7DebugPrint("Dispatching CharacterInfo to " .. player, "BootstrapServer")
+                local userProfileID = Osi.GetUserProfileID(Osi.CharacterGetReservedUserID(player))
+                local package = {["ID"] = "ProvidingCharacterInfo", ["Data"] = CharacterInfo.clientCharacters[userProfileID]}
+                Ext.PostMessageToClient(player, "S7_Journal", Ext.JsonStringify(package))
+            end
         end
     end
 end)
