@@ -43,16 +43,12 @@ local function ReinitJournal()
 --  LOAD JOURNAL
 --  ============
 
-local function LoadJournal(itemGUID)
-    local fileName = IDENTIFIER .. "/" .. tostring(itemGUID) .. ".json"
-    S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapClient")
+local function LoadJournal(fileName)
+    S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapServer")
     local file = Ext.LoadFile(fileName) or "{}"
-    if ValidString(file) then
-        S7Journal = Ext.JsonParse(file)
-        S7DebugPrint("Loaded ".. fileName .. " Successfully", "BootstrapClient")
-    else
-        ReinitJournal()
-    end
+    if ValidString(file) then S7Journal = Ext.JsonParse(file)
+    else ReinitJournal() end
+    S7DebugPrint("Loaded Successfully", "BootstrapServer")
 end
 
 --  ============
@@ -62,9 +58,9 @@ end
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
-        S7DebugPrint("Saving Journal File.", "BootstrapServer")
-        Ext.SaveFile(IDENTIFIER .. "/" .. journal.fileName .. ".json", Ext.JsonStringify(journal.Data))
-        S7DebugPrint("Saved " .. journal.fileName, "BootstrapServer")
+        S7DebugPrint("Saving Journal File: " .. journal.fileName, "BootstrapServer")
+        Ext.SaveFile(journal.fileName, Ext.JsonStringify(journal.Data))
+        S7DebugPrint("Saved Successfully", "BootstrapServer")
     end
 end)
 
@@ -74,9 +70,10 @@ end)
 
 Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function (character, template, itemGuid)
     if template == JournalTemplate then
-        S7DebugPrint(character .. " opened Journal.", "BootstrapServer")
-        LoadJournal(itemGuid)
-        local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = itemGuid, ["content"] = Rematerialize(S7Journal)}}
+        S7DebugPrint(character .. " opened Journal", "BootstrapServer")
+        local fileName = IDENTIFIER .. "/" .. tostring(itemGuid) .. ".json"
+        LoadJournal(fileName)
+        local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = fileName, ["content"] = Rematerialize(S7Journal)}}
         Ext.PostMessageToClient(character, IDENTIFIER, Ext.JsonStringify(payload))
     end
 end)
