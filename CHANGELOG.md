@@ -2,6 +2,16 @@
 
 ----------
 
+## [0.3.0.0] --- 11th December 2020 --- **_Added GM Support_**
+
+### ADDED
+
+* `CharacterUsedItemTemplate()` doesn't seem to work in GM-mode. _Changed_ to `CharacterUseItem()`.
+
+### COMMENTS
+
+* Seems to work in GM mode now - no noticeable issues.
+
 ## [0.2.1.0] --- 10th December 2020 --- **_Item-Bound-Content_**
 
 ### CHANGED

@@ -68,8 +68,9 @@ end)
 --  OPEN JOURNAL
 --  ============
 
-Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function (character, template, itemGuid)
-    if template == JournalTemplate then
+Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, itemGuid)
+    local item = Ext.GetItem(itemGuid)
+    if item.RootTemplate.Id == JournalTemplate then
         S7DebugPrint(character .. " opened Journal", "BootstrapServer")
         local fileName = IDENTIFIER .. "/" .. tostring(itemGuid) .. ".json"
         LoadJournal(fileName)

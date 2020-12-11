@@ -60,7 +60,7 @@ if UCL == nil then S7DebugPrint("Could Not Find UI Components Library!", "Auxili
 --  VARDEC
 --  ======
 
-JournalTemplate = "BOOK_S7_Journal_df7a8779-f908-43ac-b0ba-cb49d16308a9"    --  Journal's Item Root Template
+JournalTemplate = "df7a8779-f908-43ac-b0ba-cb49d16308a9"    --  Journal's Item Root Template
 
 --  =============
 --  REMATERIALIZE
