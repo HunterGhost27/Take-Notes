@@ -8,6 +8,10 @@
 
 * `CharacterUsedItemTemplate()` doesn't seem to work in GM-mode. _Changed_ to `CharacterUseItem()`.
 
+### REMOVED
+
+* _Removed_ `Unique` attribute from items.
+
 ### COMMENTS
 
 * Seems to work in GM mode now - no noticeable issues.
