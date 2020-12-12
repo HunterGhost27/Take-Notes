@@ -34,8 +34,8 @@ local function ReinitJournal()
         }
     }
     S7DebugPrint("Reinitializing S7Journal", "BootstrapServer")
-    end
-    ReinitJournal()
+end
+ReinitJournal()
 
 --  ####################################################################################################################################################
 
@@ -74,6 +74,7 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         S7DebugPrint(character .. " opened Journal", "BootstrapServer")
         local fileName = IDENTIFIER .. "/" .. tostring(itemGuid) .. ".json"
         LoadJournal(fileName)
+        item.CustomDisplayName = S7Journal.Component.Strings.caption
         local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = fileName, ["content"] = Rematerialize(S7Journal)}}
         Ext.PostMessageToClient(character, IDENTIFIER, Ext.JsonStringify(payload))
     end

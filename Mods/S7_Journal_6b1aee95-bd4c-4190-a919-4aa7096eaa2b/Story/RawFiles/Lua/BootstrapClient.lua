@@ -8,10 +8,11 @@ Ext.Require("S7_JournalAuxiliary.lua")
 --  FETCH JOURNAL DATA
 --  ==================
 
-local function SaveJournal(fileName)
+FileName = ""
+local function SaveJournal()
     local journal = {
         ["ID"] = "SaveJournal",
-        ["fileName"] = fileName,
+        ["fileName"] = FileName,
         ["Data"] = {
             ["Component"] = Rematerialize(UCL.UILibrary.GMJournal.Component),
             ["SubComponent"] = Rematerialize(UCL.UILibrary.GMJournal.SubComponent),
@@ -29,12 +30,16 @@ end
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "CharacterOpenJournal" then
+        FileName = journal.Data.fileName
         S7DebugPrint("Dispatching BuildSpecs to UI-Components-Library.", "BootstrapClient")
         local BuildSpecs = {["GMJournal"] = Rematerialize(journal.Data.content)}
         if not UCL.UILibrary.GMJournal.Exists then
             UCL.UCLBuild(Ext.JsonStringify(BuildSpecs))
-            Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_Journal_UI_Hide", function (ui, call, ...) SaveJournal(journal.Data.fileName) end)
-        else UCL.UILibrary.GMJournal.UI:Show() end
-        SaveJournal(journal.Data.fileName)
+            Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
+                SaveJournal()
+                UCL.UnloadJournal()
+            end)
+        else UCL.UCLBuild(Ext.JsonStringify(BuildSpecs)) end
+        SaveJournal()
     end
 end)

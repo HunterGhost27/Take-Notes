@@ -7,6 +7,7 @@
 ### ADDED
 
 * `CharacterUsedItemTemplate()` doesn't seem to work in GM-mode. _Changed_ to `CharacterUseItem()`.
+* Journal _Unloads_ data when closed.
 
 ### REMOVED
 
