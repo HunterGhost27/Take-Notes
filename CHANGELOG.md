@@ -2,6 +2,12 @@
 
 ----------
 
+## [0.3.0.0] --- 16th December 2020 --- **_TreasureTables_**
+
+### NEW
+
+* _Added_ journals to vanilla treasure-tables. Will shop up in trader and container inventories.
+
 ## [0.3.0.0] --- 11th December 2020 --- **_Added GM Support_**
 
 ### ADDED

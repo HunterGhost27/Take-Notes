@@ -8,6 +8,8 @@
         <field name="RootTemplate" type="RootTemplateStatObjectFieldDefinition" value="df7a8779-f908-43ac-b0ba-cb49d16308a9" />
         <field name="Value" type="IntegerStatObjectFieldDefinition" value="50" />
         <field name="InventoryTab" type="EnumerationStatObjectFieldDefinition" value="6" enumeration_type_name="InventoryTabs" />
+        <field name="Priority" type="IntegerStatObjectFieldDefinition" value="1" />
+        <field name="MinLevel" type="IntegerStatObjectFieldDefinition" value="1" />
       </fields>
     </stat_object>
   </stat_objects>
