@@ -2,7 +2,7 @@
 --  IMPORTS
 --  =======
 
-Ext.Require("S7_JournalAuxiliary.lua")
+Ext.Require("Auxiliary.lua")
 
 --  ==================
 --  FETCH JOURNAL DATA

@@ -2,7 +2,7 @@
 --  IMPORT
 --  ======
 
-Ext.Require("S7_JournalAuxiliary.lua")
+Ext.Require("Auxiliary.lua")
 
 --  ======
 --  VARDEC
