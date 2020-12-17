@@ -4,6 +4,7 @@
 
 local function addJournal()
     Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
+    S7DebugPrint("S7_Journal Added to Host's Inventory", "S7_DebugMode")
 end
 
 Ext.RegisterConsoleCommand("S7_Journal", function (cmd, command)
