@@ -14,10 +14,9 @@ local function SaveJournal()
         ["ID"] = "SaveJournal",
         ["fileName"] = FileName,
         ["Data"] = {
-            ["Component"] = Rematerialize(UCL.UILibrary.GMJournal.Component),
-            ["SubComponent"] = Rematerialize(UCL.UILibrary.GMJournal.SubComponent),
-            ["JournalMetaData"] = Rematerialize(UCL.UILibrary.GMJournal.JournalMetaData),
-            ["JournalData"] = Rematerialize(UCL.UILibrary.GMJournal.JournalData)
+            ["Component"] = Rematerialize(UCL.Journal.Component),
+            ["SubComponent"] = Rematerialize(UCL.Journal.SubComponent),
+            ["JournalData"] = Rematerialize(UCL.Journal.JournalData)
         }
     }
     Ext.PostMessageToServer(IDENTIFIER, Ext.JsonStringify(journal))
@@ -33,9 +32,9 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
         FileName = journal.Data.fileName
         S7DebugPrint("Dispatching BuildSpecs to UI-Components-Library.", "BootstrapClient")
         local BuildSpecs = {["GMJournal"] = Rematerialize(journal.Data.content)}
-        if not UCL.UILibrary.GMJournal.Exists then
+        if not UCL.Journal.Exists then
             UCL.UCLBuild(Ext.JsonStringify(BuildSpecs))
-            Ext.RegisterUICall(UCL.UILibrary.GMJournal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
+            Ext.RegisterUICall(UCL.Journal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
                 SaveJournal()
                 UCL.UnloadJournal()
             end)
