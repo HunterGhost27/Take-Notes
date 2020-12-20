@@ -8,34 +8,40 @@ Ext.Require("Auxiliary.lua")
 --  VARDEC
 --  ======
 
-local function ReinitJournal()
-    S7Journal = {
-        ["Component"] = {
-            ["Strings"] = {
-                ["caption"] = "Your Journal",
-                ["addCategory"] = "Add New Category",
-                ["addChapter"] = "Add New Chapter",
-                ["addParagraph"] = "Add New Paragraph",
-                ["editButtonCaption"] = "TOGGLE EDIT MODE",
-                ["shareWithParty"] = "Share With Party"
-            }
-        },
-        ["SubComponent"] = {
-            ["ToggleEditButton"] = {
-                ["Title"] = "ToggleEditButton",
-                ["Visible"] = true
-            }
-        },
-        ["JournalData"] = {},
-        ["JournalMetaData"] = {
-            ["CategoryEntryMap"] = {},
-            ["ChapterEntryMap"] = {},
-            ["ParagraphEntryMap"] = {}
+Journal = {}
+Journal.prototype = {
+    ["Component"] = {
+        ["Strings"] = {
+            ["caption"] = "Your Journal",
+            ["addCategory"] = "Add New Category",
+            ["addChapter"] = "Add New Chapter",
+            ["addParagraph"] = "Add New Paragraph",
+            ["editButtonCaption"] = "TOGGLE EDIT MODE",
+            ["shareWithParty"] = "Share With Party"
         }
-    }
-    S7DebugPrint("Reinitializing S7Journal", "BootstrapServer")
+    },
+    ["SubComponent"] = {
+        ["ToggleEditButton"] = {
+            ["Title"] = "ToggleEditButton",
+            ["Visible"] = true
+        }
+    },
+    ["JournalData"] = {}
+}
+Journal.mt = {}
+setmetatable(Journal, Journal.mt)
+Journal.mt.__index = Journal.prototype
+
+function Journal:New(object)
+    local object = object or {}
+    setmetatable(object, self.mt)
+    self.mt.__index = self.prototype
+    return object
 end
-ReinitJournal()
+
+--  =====================
+S7Journal = Journal:New()
+--  =====================
 
 --  ####################################################################################################################################################
 
@@ -45,9 +51,8 @@ ReinitJournal()
 
 local function LoadJournal(fileName)
     S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapServer")
-    local file = Ext.LoadFile(fileName) or "{}"
-    if ValidString(file) then S7Journal = Ext.JsonParse(file)
-    else ReinitJournal() end
+    local file = PersistentVars.Settings.Storage == "External" and Ext.JsonParse(Ext.LoadFile(fileName) or "{}") or PersistentVars.JournalData[fileName] or {}
+    S7Journal = Journal:New(file)
     S7DebugPrint("Loaded Successfully", "BootstrapServer")
 end
 
@@ -59,7 +64,8 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
         S7DebugPrint("Saving Journal File: " .. journal.fileName, "BootstrapServer")
-        Ext.SaveFile(journal.fileName, Ext.JsonStringify(journal.Data))
+        if PersistentVars.Settings.Storage == "External" then Ext.SaveFile(journal.fileName, Ext.JsonStringify(journal.Data))
+        else PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
         S7DebugPrint("Saved Successfully", "BootstrapServer")
     end
 end)
