@@ -55,6 +55,7 @@ Ext.Require("ModVersioning.lua")
 --  ============================
 
 for k, v in pairs(ModInfo) do CENTRAL[IDENTIFIER][k] = v end
+if not CENTRAL[IDENTIFIER]["ModSettings"] then CENTRAL[IDENTIFIER]["ModSettings"] = {["Storage"] = "Internal"} end
 CENTRAL[IDENTIFIER]["ModVersion"] = ParseVersion(ModInfo.Version, "string")
 Ext.SaveFile("S7Central.json", Ext.JsonStringify(CENTRAL))
 
@@ -63,3 +64,28 @@ Ext.SaveFile("S7Central.json", Ext.JsonStringify(CENTRAL))
 --  ======
 
 JournalTemplate = "df7a8779-f908-43ac-b0ba-cb49d16308a9"    --  Journal's Item Root Template
+PersistentVars = {}
+PersistentVars.JournalData = {}
+PersistentVars.Settings = {["Storage"] = "Internal"}
+
+--  ==========================
+--  RESYNCHRONIZE MOD-SETTINGS
+--  ==========================
+
+function ResynchronizeModSettings()
+    local file = Ext.LoadFile("S7Central.json") or "{}"
+    if ValidString(file) then CENTRAL = Ext.JsonParse(file) end
+    if Ext.JsonStringify(PersistentVars.Settings) ~= Ext.JsonStringify(CENTRAL[IDENTIFIER]["ModSettings"]) then
+        S7DebugPrint("Synchronizing ModSettings", "Auxiliary", "Log", true, true)
+        for setting, value in pairs(CENTRAL[IDENTIFIER]["ModSettings"]) do
+            if CENTRAL[IDENTIFIER]["ModSettings"][setting] ~= PersistentVars.Settings[setting] then
+                PersistentVars.Settings[setting] = value
+                S7DebugPrint(setting .. ": " .. tostring(value), "Auxiliary", "Log", true)
+            end
+        end
+    end
+end
+
+--  =============================================================================
+Ext.RegisterListener("SessionLoaded", function () ResynchronizeModSettings() end)
+--  =============================================================================

@@ -2,6 +2,12 @@
 
 ----------
 
+## [0.3.0.0] --- 20th December 2020 --- **_Settings_**
+
+### NEW
+
+* _Created_ ModSettings.
+* _Created_ ModSetting Option for toggling storage method.
 ## [0.3.0.0] --- 17th December 2020 --- **_Casual rewrite of the entire code_**
 
 ### NEW

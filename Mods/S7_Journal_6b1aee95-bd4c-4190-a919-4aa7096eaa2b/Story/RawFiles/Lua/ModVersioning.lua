@@ -50,22 +50,24 @@ end
 
 local currVersion = ParseVersion(ModInfo.Version, "table")
 
-local function ModUpdater(prevVersion, currVersion, forceUpdate)
+local function ModUpdater(oldVersion, newVersion, forceUpdate)
     local isUpdatedRequired = false
     local forceUpdate = forceUpdate or false
 
-    for k, _ in ipairs(currVersion) do
-        if currVersion[k] == prevVersion[k] then
+    for k, _ in ipairs(newVersion) do
+        if newVersion[k] == oldVersion[k] then
         else
-            isUpdatedRequired = currVersion[k] > prevVersion[k]
+            isUpdatedRequired = newVersion[k] > oldVersion[k]
             break
         end
     end
 
     if isUpdatedRequired or forceUpdate then
-        S7DebugPrint("Updating " .. IDENTIFIER .. ": " .. ParseVersion(prevVersion, "string") .. " --> " .. ParseVersion(currVersion, "string"), "ModVersioning", "Log", true, true)
+        S7DebugPrint("Updating " .. IDENTIFIER .. ": " .. ParseVersion(oldVersion, "string") .. " --> " .. ParseVersion(newVersion, "string"), "ModVersioning", "Log", true, true)
         --  DO UPDATE STUFF
     end
 end
 
+--  ================================
 ModUpdater(prevVersion, currVersion)
+--  ================================
