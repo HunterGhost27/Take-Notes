@@ -12,14 +12,14 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="UI Components Library" type="22" />
                             <attribute id="UUID" value="b66d56c6-12f9-4abc-844f-0c30b89d32e4" type="22" />
-                            <attribute id="Version" value="33947648" type="4" />
+                            <attribute id="Version" value="50331648" type="4" />
                         </node>
                     </children>
                 </node>
                 <node id="ModuleInfo">
                     <attribute id="Author" value="Hunter-Ghost-27" type="30" />
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
-                    <attribute id="Description" value="Your own personal Journal. Take notes, keep a record of events and characters, and write about your deeds (or misdeeds) as you adventure through Rivellon. Author the most comprehensive compendium of knowledge that transcends even Cranley Huwbert&apos;s! or just make a todo-list. Create, View, Edit your journal-entries in-game or externally." type="30" />
+                    <attribute id="Description" value="Editable notebooks! Take notes, keep a record of events and characters, and write about your deeds (or misdeeds) as you adventure through Rivellon. Author the most comprehensive compendium of knowledge that transcends even Cranley Huwbert&apos;s! or just make a todo-list. Create, View, Edit your entries in-game or externally." type="30" />
                     <attribute id="DescriptionName" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
                     <attribute id="DisplayName" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
                     <attribute id="Folder" value="S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b" type="30" />
@@ -27,7 +27,7 @@
                     <attribute id="LobbyLevelName" value="" type="22" />
                     <attribute id="MD5" value="" type="23" />
                     <attribute id="MenuLevelName" value="" type="22" />
-                    <attribute id="Name" value="S7_Journal" type="22" />
+                    <attribute id="Name" value="Take Notes" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
                     <attribute id="PhotoBooth" value="" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
