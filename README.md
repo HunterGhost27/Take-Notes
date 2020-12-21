@@ -22,6 +22,7 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 * The mod adds **editable notebooks** to **Story** and **GM modes**.
 * Maintain your own personal **Journal**.
 * _Notebooks_ have been integrated into vanilla _treasure-tables_. They will appear as loot and you can buy them from ingredient-traders.
+* _Notebooks_ can also be crafted. `LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper`
 * _Create_, _View_, and _Edit_ your entries from an in-game UI.
 * Notebook contents can be saved on a per-character or per-item basis.
 

@@ -10,6 +10,7 @@
 * _Created_ ModSetting Option for toggling storage method.
 * _Created_ ConsoleCommand to remove JournalData from PersistentVars.
 * _Created_ ConsoleCommand to export PersistentVars entries.
+* _Added_ Crafting recipe for notebooks.
 
 ### CHANGED
 

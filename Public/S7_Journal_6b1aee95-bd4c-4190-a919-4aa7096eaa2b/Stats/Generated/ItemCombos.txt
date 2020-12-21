@@ -1,0 +1,13 @@
+new ItemCombination "BOOK_Skill_Necromancy_Blank_Step2_A_SCROLL_Shout_NecromancerTotems"
+data "RecipeCategory" "Grimoire"
+data "Type 1" "Object"
+data "Object 1" "BOOK_Skill_Witchcraft_Blank_Step2_A"
+data "Transform 1" "Transform"
+data "Type 2" "Object"
+data "Object 2" "SCROLL_Shout_NecromancerTotems"
+data "Transform 2" "Consume"
+
+new ItemCombinationResult "BOOK_Skill_Necromancy_Blank_Step2_A_SCROLL_Shout_NecromancerTotems_1"
+data "Result 1" "SKILLBOOK_Necromancy_NecromancerTotems"
+data "PreviewStatsID" "SKILLBOOK_Necromancy_NecromancerTotems"
+
