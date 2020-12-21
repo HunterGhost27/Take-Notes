@@ -45,18 +45,37 @@ if UCL == nil then S7DebugPrint("Could Not Find UI Components Library!", "Auxili
 --  MOD INFORMATION
 --  ===============
 
+local modInfoTable = {
+    ["Author"] = ModInfo.Author,
+    ["Name"] = ModInfo.Name,
+    ["UUID"] = ModInfo.UUID,
+    ["Version"] = ModInfo.Version,
+    ["PublishedVersion"] = ModInfo.PublishVersion,
+    ["ModVersion"] = "0.0.0.0",
+    ["ModSettings"] = {
+        ["Storage"] = "Internal",
+        ["SyncTo"] = "ItemGUID"
+    }
+}
+
 CENTRAL = {}    --  Holds Global Settings and Information
 local file = Ext.LoadFile("S7Central.json") or "{}"
 if ValidString(file) then CENTRAL = Ext.JsonParse(file) end
-if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = {} end
+if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = Rematerialize(modInfoTable) end
 
 --  ====  MOD VERSIONING  ======
 Ext.Require("ModVersioning.lua")
 --  ============================
 
-local modInfoFields = {"Author", "Name", "UUID", "Version", "PublishedVersion", "ModVersion", "ModSettings"}
-for _, field in pairs(modInfoFields) do if ModInfo[field] then CENTRAL[IDENTIFIER][field] = ModInfo[field] end end
-if not CENTRAL[IDENTIFIER]["ModSettings"] then CENTRAL[IDENTIFIER]["ModSettings"] = {["Storage"] = "Internal"} end
+local function initCENTRAL(ref, tar)
+    for field, value in pairs(ref) do
+        if ModInfo[field] then tar[field] = Rematerialize(ModInfo[field])
+        else if not tar[field] then tar[field] = Rematerialize(value) end end
+        if type(value) == 'table' then initCENTRAL(value, tar[field]) end
+    end
+end
+
+initCENTRAL(modInfoTable, CENTRAL[IDENTIFIER])
 CENTRAL[IDENTIFIER]["ModVersion"] = ParseVersion(ModInfo.Version, "string")
 Ext.SaveFile("S7Central.json", Ext.JsonStringify(CENTRAL))
 
@@ -67,7 +86,7 @@ Ext.SaveFile("S7Central.json", Ext.JsonStringify(CENTRAL))
 JournalTemplate = "df7a8779-f908-43ac-b0ba-cb49d16308a9"    --  Journal's Item Root Template
 PersistentVars = {}
 PersistentVars.JournalData = {}
-PersistentVars.Settings = {["Storage"] = "Internal"}
+PersistentVars.Settings = Rematerialize(CENTRAL[IDENTIFIER]["ModSettings"])
 
 --  ==========================
 --  RESYNCHRONIZE MOD-SETTINGS

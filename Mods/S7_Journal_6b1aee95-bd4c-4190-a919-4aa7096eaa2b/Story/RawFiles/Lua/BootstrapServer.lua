@@ -65,7 +65,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     if journal.ID == "SaveJournal" then
         S7DebugPrint("Saving Journal File: " .. journal.fileName, "BootstrapServer")
         if PersistentVars.Settings.Storage == "External" then Ext.SaveFile(journal.fileName, Ext.JsonStringify(journal.Data))
-        else PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
+        elseif PersistentVars.Settings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
         S7DebugPrint("Saved Successfully", "BootstrapServer")
     end
 end)
@@ -78,7 +78,11 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
         S7DebugPrint(character .. " opened Journal", "BootstrapServer")
-        local fileName = IDENTIFIER .. "/" .. tostring(itemGuid) .. ".json"
+
+        local fileName = PersistentVars.Settings.Storage == "External" and IDENTIFIER .. "/" or ""
+        if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".json"
+        elseif PersistentVars.Settings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".json" end
+
         LoadJournal(fileName)
         item.CustomDisplayName = S7Journal.Component.Strings.caption
         local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = fileName, ["content"] = Rematerialize(S7Journal)}}
