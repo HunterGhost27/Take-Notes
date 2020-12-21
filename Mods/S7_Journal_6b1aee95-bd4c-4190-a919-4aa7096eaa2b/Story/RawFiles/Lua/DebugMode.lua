@@ -52,7 +52,7 @@ end
 --  REGISTER CONSOLE COMMANDS
 --  =========================
 
-Ext.RegisterConsoleCommand("S7_Journal", function (cmd, command, ...)
+Ext.RegisterConsoleCommand(IDENTIFIER, function (cmd, command, ...)
     local args = {...}
     if command == "AddJournal" then addJournal() end
     if command == "ResyncSettings" then ResynchronizeModSettings() end
