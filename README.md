@@ -9,7 +9,7 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 ## Releases
 
 * ~~***[Steam Workshop]()***~~
-* ***[Github](https://github.com/Shresht7/S7_Journal)***
+* ***[Github](https://github.com/Shresht7/Take-Notes)***
 * ~~***[Nexus]()***~~
 
 ## Requirements
