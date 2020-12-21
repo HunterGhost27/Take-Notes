@@ -1,4 +1,4 @@
-# Noteworthy
+# Take Notes
 
 ## Divinity: Original Sin 2 - Definitive Edition
 

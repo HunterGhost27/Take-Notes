@@ -1,4 +1,4 @@
-# S7_Journal Changelog
+# Take Notes Changelog
 
 ----------
 
