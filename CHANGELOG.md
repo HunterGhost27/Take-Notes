@@ -10,6 +10,9 @@
 * _Created_ ModSetting Option for toggling storage method.
 * _Created_ ConsoleCommand to remove JournalData from PersistentVars.
 
+### CHANGED
+
+* _Renamed_ "Journal" to "Notebook".
 ## [0.3.0.0] --- 17th December 2020 --- **_Casual rewrite of the entire code_**
 
 ### NEW
