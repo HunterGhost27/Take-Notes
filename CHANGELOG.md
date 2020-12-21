@@ -8,12 +8,15 @@
 
 * _Created_ ModSettings.
 * _Created_ ModSetting Option for toggling storage method.
+* _Created_ ConsoleCommand to remove JournalData from PersistentVars.
+
 ## [0.3.0.0] --- 17th December 2020 --- **_Casual rewrite of the entire code_**
 
 ### NEW
 
 * _Renamed_ `S7_JournalAuxiliary.lua` to `Auxiliary.lua`.
 * _Renamed_ `S7_ModVersioning.lua` to `ModVersioning.lua`.
+
 
 ## [0.3.0.0] --- 16th December 2020 --- **_TreasureTables_**
 
