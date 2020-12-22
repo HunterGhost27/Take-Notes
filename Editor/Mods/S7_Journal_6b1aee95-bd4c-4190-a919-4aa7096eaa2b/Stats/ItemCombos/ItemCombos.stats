@@ -12,13 +12,13 @@
         <field name="Object 2" type="StringStatObjectFieldDefinition" value="LOOT_Needle_Thread_A" />
         <field name="Transform 2" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientTransformType" />
         <field name="Type 3" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientType" />
-        <field name="Object 3" type="StringStatObjectFieldDefinition" value="BOOK_Sheet_Paper_A" />
+        <field name="Object 3" type="StringStatObjectFieldDefinition" value="BOOK_Paper_Sheet_A" />
         <field name="Transform 3" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientTransformType" />
         <field name="Type 4" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientType" />
-        <field name="Object 4" type="StringStatObjectFieldDefinition" value="BOOK_Sheet_Paper_A" />
+        <field name="Object 4" type="StringStatObjectFieldDefinition" value="BOOK_Paper_Sheet_A" />
         <field name="Transform 4" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientTransformType" />
         <field name="Type 5" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientType" />
-        <field name="Object 5" type="StringStatObjectFieldDefinition" value="BOOK_Sheet_Paper_A" />
+        <field name="Object 5" type="StringStatObjectFieldDefinition" value="BOOK_Paper_Sheet_A" />
         <field name="Transform 5" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientTransformType" />
         <field name="ResultAmount 1" type="IntegerStatObjectFieldDefinition" value="1" />
         <field name="Result 1" type="StringStatObjectFieldDefinition" value="BOOK_S7_Notebook" />
