@@ -5,14 +5,16 @@
 --  ADD JOURNAL
 --  -----------
 
+--- Add Journal to HostCharacter
 local function addJournal()
     Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
-    S7DebugPrint("BOOK_S7_Notebook Added to Host's Inventory", "S7_DebugMode")
+    S7DebugPrint("BOOK_S7_Notebook Added to Host's Inventory", "DebugMode")
 end
 
 --  LIST PERSISTENT JOURNALS
 --  ------------------------
 
+--- List Journal entries in PersistentVars
 local function listPersistentJournals()
     if PersistentVars.JournalData then for fileName, _ in pairs(PersistentVars.JournalData) do S7DebugPrint(fileName, "DebugMode") end end
 end
@@ -20,6 +22,8 @@ end
 --  EXPORT PERSISTENT JOURNALS
 --  --------------------------
 
+--- Export PersistentVars to OsirisData
+---@param param string fileName or 'all'
 local function exportPersistentJournals(param)
     if PersistentVars.JournalData then
         if string.lower(param) == "all" then
@@ -38,6 +42,8 @@ end
 --  REMOVE JOURNAL DATA
 --  -------------------
 
+--- Remove Journal entry from PersistentVars
+---@param param string fileName or 'all'
 local function removeJournalData(param)
     if string.lower(tostring(param)) == "all" then
         PersistentVars.JournalData = nil
@@ -52,6 +58,10 @@ end
 --  REGISTER CONSOLE COMMANDS
 --  =========================
 
+--- Console Commands
+---@param cmd string S7_Journal
+---@param command string Command Name
+---@vararg string[] Command Arguments
 Ext.RegisterConsoleCommand(IDENTIFIER, function (cmd, command, ...)
     local args = {...}
     if command == "AddJournal" then addJournal() end

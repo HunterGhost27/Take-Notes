@@ -39,6 +39,7 @@ end
 UCL = Mods["S7_UI_Components_Library"]  --  Import UI Components Library
 ValidString = UCL.ValidString
 Rematerialize = UCL.Rematerialize
+Integrate = UCL.Integrate
 if UCL == nil then S7DebugPrint("Could Not Find UI Components Library!", "Auxiliary", "Error", true, true, "*") end
 
 --  ===============
@@ -67,6 +68,9 @@ if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = Rematerialize(modInfoTa
 Ext.Require("ModVersioning.lua")
 --  ============================
 
+--- Initialize CENTRAL
+---@param ref table Reference table
+---@param tar table Target table
 local function initCENTRAL(ref, tar)
     for field, value in pairs(ref) do
         if ModInfo[field] then tar[field] = Rematerialize(ModInfo[field])
@@ -92,6 +96,7 @@ PersistentVars.Settings = Rematerialize(CENTRAL[IDENTIFIER]["ModSettings"])
 --  RESYNCHRONIZE MOD-SETTINGS
 --  ==========================
 
+--- Resyncs ModSettings and PersistentVar Settings.
 function ResynchronizeModSettings()
     local file = Ext.LoadFile("S7Central.json") or "{}"
     if ValidString(file) then CENTRAL = Ext.JsonParse(file) end

@@ -8,11 +8,10 @@ Ext.Require("Auxiliary.lua")
 --  VARDEC
 --  ======
 
-Journal = {}
-Journal.prototype = {
+Journal = {
     ["Component"] = {
         ["Strings"] = {
-            ["caption"] = "Your Journal",
+            ["caption"] = "Notebook",
             ["addCategory"] = "Add New Category",
             ["addChapter"] = "Add New Chapter",
             ["addParagraph"] = "Add New Paragraph",
@@ -28,14 +27,10 @@ Journal.prototype = {
     },
     ["JournalData"] = {}
 }
-Journal.mt = {}
-setmetatable(Journal, Journal.mt)
-Journal.mt.__index = Journal.prototype
 
 function Journal:New(object)
     local object = object or {}
-    setmetatable(object, self.mt)
-    self.mt.__index = self.prototype
+    object = Integrate(object, self)
     return object
 end
 
@@ -49,6 +44,8 @@ S7Journal = Journal:New()
 --  LOAD JOURNAL
 --  ============
 
+--- Load Journal
+---@param fileName string
 local function LoadJournal(fileName)
     S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapServer")
     local file = PersistentVars.Settings.Storage == "External" and Ext.JsonParse(Ext.LoadFile(fileName) or "{}") or PersistentVars.JournalData[fileName] or {}
@@ -60,6 +57,9 @@ end
 --  SAVE JOURNAL
 --  ============
 
+--- Save Journal
+---@param channel string
+---@param payload string
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
@@ -74,6 +74,9 @@ end)
 --  OPEN JOURNAL
 --  ============
 
+--- Character Opens Journal
+---@param character string
+---@param itemGuid string
 Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, itemGuid)
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
