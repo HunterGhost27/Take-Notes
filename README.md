@@ -56,6 +56,7 @@ The following console-commands are available for the player to use. The general 
 | `ResyncSettings`                         | Reloads and reapplies mod-settings from the `S7Central.json` file               |
 | `ListPersistentJournals`                 | Prints a list of saved entries in PersistentVars                                |
 | `ExportPersistentJournals <JournalName>` | Export entry from PersistentVars to OsirisData. Use `all` to export all         |
+| `ImportFromOsirisData <JournalName>`     | Import entry from OsirisData.                                                   |
 | `RemoveJournal <JournalName>`            | Removes the entry from PersistentVars. Use `'all'` to clear persistent-vars out |
 
 >Note: Console-Commands need the extender's `DeveloperMode` and `CreateConsole` settings to be enabled.

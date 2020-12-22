@@ -39,6 +39,21 @@ local function exportPersistentJournals(param)
     end
 end
 
+--  IMPORT TO PERSISTENT JOURNALS
+--  -----------------------------
+
+--- Import file from OsirisData into PersistentVars
+---@param param string fileName
+local function importFromOsirisData(param)
+    local file = Ext.LoadFile(IDENTIFIER .. "/" .. tostring(param) .. ".json")
+    if ValidString(file) then
+        PersistentVars.JournalData[tostring(param)] = file
+        S7DebugPrint("Imported from OsirisData: " .. tostring(param), "DebugMode")
+    else
+        S7DebugPrint("Could not import file: " .. tostring(param), "DebugMode")
+    end
+end
+
 --  REMOVE JOURNAL DATA
 --  -------------------
 
@@ -68,6 +83,7 @@ Ext.RegisterConsoleCommand(IDENTIFIER, function (cmd, command, ...)
     if command == "ResyncSettings" then ResynchronizeModSettings() end
     if command == "ListPersistentJournals" then listPersistentJournals() end
     if command == "ExportPersistentJournals" then exportPersistentJournals(args[1]) end
+    if command == "ImportFromOsirisData" then importFromOsirisData(args[1]) end
     if command == "RemoveJournalData" then removeJournalData(args[1]) end
 end)
 
