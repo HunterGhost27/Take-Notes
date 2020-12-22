@@ -97,4 +97,4 @@ end)
 --  REQUIRE DEBUG MODE
 --  ==================
 
-if Ext.IsDeveloperMode() then Ext.Require("DebugMode.lua") end
+if Ext.IsDeveloperMode() then Ext.Require("DevMode.lua") end
