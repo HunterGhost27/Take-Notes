@@ -80,6 +80,7 @@ end)
 Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, itemGuid)
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
+        if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
         S7DebugPrint(character .. " opened Journal", "BootstrapServer")
 
         local fileName = PersistentVars.Settings.Storage == "External" and IDENTIFIER .. "/" or ""
@@ -92,6 +93,16 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         Ext.PostMessageToClient(character, IDENTIFIER, Ext.JsonStringify(payload))
     end
 end)
+
+--  ==========================
+--  GRANT UNIQUES ON GAMESTART
+--  ==========================
+
+if CENTRAL[IDENTIFIER].ModSettings.Uniques then
+    Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
+        for _, player in pairs(Osi.DB_IsPlayer:Get(nil)[1]) do Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1) end
+    end)
+end
 
 --  ==================
 --  REQUIRE DEBUG MODE

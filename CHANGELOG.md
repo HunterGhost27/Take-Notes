@@ -7,6 +7,7 @@
 ### NEW
 
 * _Added_ Notebooks to treasure table: `ST_KitchenThings`.
+* _Added_ option for `Unique` notebooks.
 
 ### FIXED
 

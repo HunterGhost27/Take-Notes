@@ -55,7 +55,8 @@ local modInfoTable = {
     ["ModVersion"] = "0.0.0.0",
     ["ModSettings"] = {
         ["Storage"] = "Internal",
-        ["SyncTo"] = "ItemGUID"
+        ["SyncTo"] = "ItemGUID",
+        ["Uniques"] = false
     }
 }
 

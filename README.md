@@ -21,7 +21,7 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 
 * The mod adds **editable notebooks** to **Story** and **GM modes**.
 * Maintain your own personal **Journal**.
-* _Notebooks_ have been integrated into vanilla _treasure-tables_. They will appear as loot and you can buy them from ingredient-traders.
+* _Notebooks_ have been integrated into vanilla _treasure-tables_. They will appear as loot and you can buy them from traders.
 * _Notebooks_ can also be crafted. `LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper`
 * _Create_, _View_, and _Edit_ your entries from an in-game UI.
 * Notebook contents can be saved on a per-character or per-item basis.
@@ -30,7 +30,7 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 
 ## ModSettings
 
-Players can change mod-settings by editing the global settings file (`S7Central.json`) in the `Osiris Data` folder. (`..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\`)
+Players can change mod-settings by editing the global settings file (`S7Central.json`) in the `Osiris Data` folder. (`..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json`)
 
 ### Storage
 
@@ -55,7 +55,7 @@ The following console-commands are available for the player to use. The general 
 | `AddJournal`                             | A new notebook will be added to the host character's inventory                  |
 | `ResyncSettings`                         | Reloads and reapplies mod-settings from the `S7Central.json` file               |
 | `ListPersistentJournals`                 | Prints a list of saved entries in PersistentVars                                |
-| `ExportPersistentJournals <JournalName>` | Export entry from PersistentVars to OsirisData. Use `all` to export all         |
+| `ExportPersistentJournals <JournalName>` | Export entry from PersistentVars to OsirisData. Use `'all'` to export all       |
 | `ImportFromOsirisData <JournalName>`     | Import entry from OsirisData.                                                   |
 | `RemoveJournal <JournalName>`            | Removes the entry from PersistentVars. Use `'all'` to clear persistent-vars out |
 
