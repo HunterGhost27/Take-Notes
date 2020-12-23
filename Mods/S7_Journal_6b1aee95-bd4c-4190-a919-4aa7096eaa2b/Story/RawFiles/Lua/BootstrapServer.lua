@@ -100,7 +100,16 @@ end)
 
 if CENTRAL[IDENTIFIER].ModSettings.Uniques then
     Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
-        for _, player in pairs(Osi.DB_IsPlayer:Get(nil)[1]) do Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1) end
+        if Osi.IsGameLevel(level) then
+            local db = Osi.DB_IsPlayer:Get(nil)[1]
+            if db then
+                for _, player in pairs(db) do
+                    if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
+                        Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1)
+                    end
+                end
+            end
+        end
     end)
 end
 
