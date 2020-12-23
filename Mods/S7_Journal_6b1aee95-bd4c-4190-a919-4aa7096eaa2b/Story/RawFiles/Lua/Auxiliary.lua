@@ -74,9 +74,9 @@ Ext.Require("ModVersioning.lua")
 ---@param tar table Target table
 local function initCENTRAL(ref, tar)
     for field, value in pairs(ref) do
+        if type(value) == 'table' then initCENTRAL(value, tar[field]) end
         if ModInfo[field] then tar[field] = Rematerialize(ModInfo[field])
         else if not tar[field] then tar[field] = Rematerialize(value) end end
-        if type(value) == 'table' then initCENTRAL(value, tar[field]) end
     end
 end
 
