@@ -72,6 +72,7 @@ Ext.RegisterListener("StatsLoaded", function()
 
     local targetTreasureTables = {
         "ST_IngredientsTrader",
+        "ST_KitchenThings",
         "ST_PaperWork"
     }
 

@@ -2,6 +2,16 @@
 
 ----------
 
+## [1.0.0.0] --- 23rd December 2020 --- **_Preparing for Release_**
+
+### NEW
+
+* _Added_ Notebooks to treasure table: `ST_KitchenThings`.
+
+### FIXED
+
+* _Fixed_ item combo bug.
+
 ## [0.3.0.0] --- 20th December 2020 --- **_Settings_**
 
 ### NEW
