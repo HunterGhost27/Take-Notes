@@ -21,7 +21,7 @@
         <field name="Object 5" type="StringStatObjectFieldDefinition" value="BOOK_Paper_Sheet_A" />
         <field name="Transform 5" type="EnumerationStatObjectFieldDefinition" value="1" enumeration_type_name="IngredientTransformType" />
         <field name="ResultAmount 1" type="IntegerStatObjectFieldDefinition" value="1" />
-        <field name="Result 1" type="StringStatObjectFieldDefinition" value="BOOK_S7_Notebook" />
+        <field name="Result 1" type="StringStatObjectFieldDefinition" value="BOOK_S7_JournalStat" />
         <field name="PreviewStatsID" type="StringStatObjectFieldDefinition" value="BOOK_S7_JournalStat" />
       </fields>
     </stat_object>

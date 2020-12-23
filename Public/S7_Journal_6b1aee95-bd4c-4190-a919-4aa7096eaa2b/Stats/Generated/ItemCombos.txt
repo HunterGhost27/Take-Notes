@@ -18,6 +18,6 @@ data "Transform 5" "Consume"
 
 new ItemCombinationResult "S7_JournalRecipe_1"
 data "ResultAmount 1" "1"
-data "Result 1" "BOOK_S7_Notebook"
+data "Result 1" "BOOK_S7_JournalStat"
 data "PreviewStatsID" "BOOK_S7_JournalStat"
 
