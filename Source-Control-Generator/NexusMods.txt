@@ -1,0 +1,75 @@
+[heading]Take Notes[/heading]
+[heading]Divinity: Original Sin 2 - Definitive Edition[/heading]
+[line]
+Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]characters[/i], and write about your [i]deeds[/i] (or [i]misdeeds[/i]) as you adventure through Rivellon. Author the most comprehensive compendium of knowledge that transcends even Cranley Huwbert's! or just make a todo-list. [i]Create[/i], [i]View[/i], [i]Edit[/i] your entries in-game or externally.
+
+[heading]Releases[/heading]
+[list]
+[*]~~[i][b][url=about:///]Steam Workshop[/url][/b][/i]~~
+[*][i][b][url=https://github.com/Shresht7/Take-Notes]Github[/url][/b][/i]
+[*]~~[i][b][url=about:///]Nexus[/url][/b][/i]~~
+[/list]
+[heading]Requirements[/heading]
+[list]
+[*][i][b][url=https://github.com/Norbyte/ositools]Script-Extender[/url][/b][/i]
+[*][i][b][url=https://github.com/Shresht7/UI-Components-Library]UI Components Library[/url][/b][/i]
+[/list]
+[heading]Features[/heading]
+[list]
+[*]Maintain your own personal [b]Journal[/b].
+[*]The mod adds [b]editable notebooks[/b] to [b]Story[/b] and [b]GM modes[/b].
+[*][i]Notebooks[/i] have been integrated into vanilla [i]treasure-tables[/i]. They will appear as [b]loot[/b] and you can buy them from traders.
+[*][i]Notebooks[/i] can also be [b]crafted[/b]. [code]LeatherScraps + Needle-&amp;-Thread + 3x Sheet-of-Paper[/code]
+[*][i]Create[/i], [i]View[/i], and [i]Edit[/i] your entries from an in-game UI.
+[*]Notebook contents can be saved on a [i]per-character[/i] or [i]per-item basis[/i].
+[/list]
+[img]https://imgur.com/tHcOoGF.png[/img]
+
+[heading]ModSettings[/heading]
+Players can change mod-settings by editing the global settings file ([code]S7Central.json[/code]) in the [code]Osiris Data[/code] folder. ([code]..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json[/code]). The internal identifier for the mod is [code]S7_Journal[/code].
+
+[heading]Uniques[/heading]
+The [code]Uniques[/code] option is for people who want access to these notebooks from the very beginning. However only one will spawn per player character.
+
+[list]
+[*]if [b][code]Uniques[/code][/b] is set to true, each player will be granted one unique notebook when the game starts. They will not spawn as loot or treasure however. (Default: [code]false[/code])
+[/list]
+[heading]Storage[/heading]
+Storage mode dictates how the contents of the notebooks are saved.
+
+[list]
+[*][b][code]Internal[/code][/b] storage mode saves the contents of the notebooks in the save-file itself. Notebook contents will be a part of your save. (Default)
+[*][b][code]External[/code][/b] storage mode saves the contents of the notebooks in an external json file in [code]Osiris Data[/code]. This allows you to edit them outside the game.
+[/list]
+[heading]SyncTo[/heading]
+Notebook contents can be saved on a per-character or per-item basis.
+
+[list]
+[*][b][code]CharacterGUID[/code][/b]: If saved on a per-character basis, each character will have a unique notebook. Opening any notebook item will always open the one associated to them.
+[*][b][code]ItemGUID[/code][/b]: When synced on a per-item basis, each notebook will hold its own content. (Default)
+[/list]
+[heading]Console-Commands[/heading]
+The following console-commands are available for the player to use. The general format for the commands is [code]!S7_Journal &lt;Command&gt; &lt;Arguments&gt;[/code].
+
+| command                                  | result                                                                        |
+| ---------------------------------------- | ----------------------------------------------------------------------------- |
+| [code]AddJournal[/code]                             | A new notebook will be added to the host character's inventory                |
+| [code]ResyncSettings[/code]                         | Reloads and reapplies mod-settings from the [code]S7Central.json[/code] file             |
+| [code]ListPersistentJournals[/code]                 | Prints a list of saved entries in PersistentVars                              |
+| [code]ExportPersistentJournals &lt;JournalName&gt;[/code] | Export entry from PersistentVars to OsirisData. Use [code]all[/code] to export all       |
+| [code]ImportFromOsirisData &lt;JournalName&gt;[/code]     | Import entry from OsirisData.                                                 |
+| [code]RemoveJournal &lt;JournalName&gt;[/code]            | Removes the entry from PersistentVars. Use [code]all[/code] to clear persistent-vars out |
+
+<blockquote>
+Note: Console-Commands need the script-extender's [b]debug-console[/b] which can be enabled by setting [code]DeveloperMode[/code] and [code]CreateConsole[/code] to true in [code]OsirisExtenderSettings.json[/code].
+
+</blockquote>
+[line]
+[heading]Thanks and Credits[/heading]
+[list]
+[*][url=http://store.steampowered.com/app/435150/Divinity_Original_Sin_2/][b]Divinity: Original Sin 2[/b][/url], a game by [b][url=http://larian.com/]Larian Studios[/url][/b].
+[*][b]LaughingLeader[/b] for the [b][url=https://github.com/LaughingLeader/SourceControlGenerator]Source Control Generator[/url][/b].
+[*][b]Norbyte[/b] for The [b][url=https://github.com/Norbyte/ositools]Script-Extender[/url][/b].
+[*][b]Sebastian Lenz[/b] and [b]LaughingLeader[/b] for the [b][url=https://marketplace.visualstudio.com/items?itemName=sebastian-lenz.divinity-vscode]VSCode extension[/url][/b].
+[/list]
+
