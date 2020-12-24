@@ -34,10 +34,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
         local BuildSpecs = {["GMJournal"] = Rematerialize(journal.Data.content)}
         if not UCL.Journal.Exists then
             UCL.UCLBuild(BuildSpecs)
-            Ext.RegisterUICall(UCL.Journal.UI, "S7_Journal_UI_Hide", function (ui, call, ...)
-                SaveJournal()
-                UCL.UnloadJournal()
-            end)
+            Ext.RegisterUICall(UCL.Journal.UI, "S7_Journal_UI_Hide", function (ui, call, ...) SaveJournal(); UCL.UnloadJournal() end)
         else UCL.UCLBuild(BuildSpecs) end
         SaveJournal()
     end
