@@ -40,6 +40,8 @@ UCL = Mods["S7_UI_Components_Library"]  --  Import UI Components Library
 ValidString = UCL.ValidString
 Rematerialize = UCL.Rematerialize
 Integrate = UCL.Integrate
+LoadFile = UCL.LoadFile
+SaveFile = UCL.SaveFile
 if UCL == nil then S7DebugPrint("Could Not Find UI Components Library!", "Auxiliary", "Error", true, true, "*") end
 
 --  ===============
@@ -60,9 +62,7 @@ local modInfoTable = {
     }
 }
 
-CENTRAL = {}    --  Holds Global Settings and Information
-local file = Ext.LoadFile("S7Central.json") or "{}"
-if ValidString(file) then CENTRAL = Ext.JsonParse(file) end
+CENTRAL = LoadFile("S7Central.json") or {} --  Holds Global Settings and Information
 if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = Rematerialize(modInfoTable) end
 
 --  ====  MOD VERSIONING  ======
@@ -82,7 +82,7 @@ end
 
 initCENTRAL(modInfoTable, CENTRAL[IDENTIFIER])
 CENTRAL[IDENTIFIER]["ModVersion"] = ParseVersion(ModInfo.Version, "string")
-Ext.SaveFile("S7Central.json", Ext.JsonStringify(CENTRAL))
+SaveFile("S7Central", CENTRAL)
 
 --  ======
 --  VARDEC
@@ -99,8 +99,7 @@ PersistentVars.Settings = Rematerialize(CENTRAL[IDENTIFIER]["ModSettings"])
 
 --- Resyncs ModSettings and PersistentVar Settings.
 function ResynchronizeModSettings()
-    local file = Ext.LoadFile("S7Central.json") or "{}"
-    if ValidString(file) then CENTRAL = Ext.JsonParse(file) end
+    CENTRAL = LoadFile("S7Central.json") or {}
     if Ext.JsonStringify(PersistentVars.Settings) ~= Ext.JsonStringify(CENTRAL[IDENTIFIER]["ModSettings"]) then
         S7DebugPrint("Synchronizing ModSettings", "Auxiliary", "Log", true, true)
         for setting, value in pairs(CENTRAL[IDENTIFIER]["ModSettings"]) do

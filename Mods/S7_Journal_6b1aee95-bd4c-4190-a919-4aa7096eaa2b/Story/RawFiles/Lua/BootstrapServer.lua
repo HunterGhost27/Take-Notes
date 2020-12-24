@@ -48,7 +48,7 @@ S7Journal = Journal:New()
 ---@param fileName string
 local function LoadJournal(fileName)
     S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapServer")
-    local file = PersistentVars.Settings.Storage == "External" and Ext.JsonParse(Ext.LoadFile(fileName) or "{}") or PersistentVars.JournalData[fileName] or {}
+    local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or {}
     S7Journal = Journal:New(file)
     S7DebugPrint("Loaded Successfully", "BootstrapServer")
 end
@@ -64,7 +64,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
         S7DebugPrint("Saving Journal File: " .. journal.fileName, "BootstrapServer")
-        if PersistentVars.Settings.Storage == "External" then Ext.SaveFile(journal.fileName, Ext.JsonStringify(journal.Data))
+        if PersistentVars.Settings.Storage == "External" then SaveFile(journal.fileName, journal.Data)
         elseif PersistentVars.Settings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
         S7DebugPrint("Saved Successfully", "BootstrapServer")
     end
