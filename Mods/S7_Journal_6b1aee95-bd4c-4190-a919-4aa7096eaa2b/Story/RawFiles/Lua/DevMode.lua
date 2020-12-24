@@ -28,11 +28,11 @@ local function exportPersistentJournals(param)
     if PersistentVars.JournalData then
         if string.lower(param) == "all" then
             for fileName, contents in pairs(PersistentVars.JournalData) do
-                SaveFile(IDENTIFIER .. "/" .. tostring(fileName) .. ".json", contents)
+                SaveFile(IDENTIFIER .. "/" .. tostring(fileName), contents)
                 S7DebugPrint("Exported: " .. tostring(fileName), "DevMode")
             end
         elseif PersistentVars.JournalData[param] then
-            SaveFile(IDENTIFIER .. "/" .. tostring(param) .. ".json", PersistentVars.JournalData[param])
+            SaveFile(IDENTIFIER .. "/" .. tostring(param), PersistentVars.JournalData[param])
             S7DebugPrint("Exported: " .. tostring(param), "DevMode")
         else S7DebugPrint("No match found: " .. tostring(param), "DevMode") end
     else S7DebugPrint("No entries in PersistentVars", "DevMode")
