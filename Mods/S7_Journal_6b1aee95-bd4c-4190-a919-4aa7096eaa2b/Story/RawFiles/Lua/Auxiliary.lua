@@ -82,7 +82,7 @@ end
 
 initCENTRAL(modInfoTable, CENTRAL[IDENTIFIER])
 CENTRAL[IDENTIFIER]["ModVersion"] = ParseVersion(ModInfo.Version, "string")
-SaveFile("S7Central", CENTRAL)
+SaveFile("S7Central.json", CENTRAL)
 
 --  ======
 --  VARDEC
