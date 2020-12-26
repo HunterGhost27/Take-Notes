@@ -28,6 +28,8 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 
 ![Journal](https://imgur.com/tHcOoGF.png)
 
+>NOTE: The notebook contents are _saved_ when the UI is closed. So make sure to close it when you're done. This is especially important to keep in mind if you use multiple notebooks. Opening a different notebook when the UI is open will cause the contents to get mixed-up. Just close the first one before you open the next.
+
 ## ModSettings
 
 Players can change mod-settings by editing the global settings file (`S7Central.json`) in the `Osiris Data` folder. (`..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json`). The internal identifier for the mod is `S7_Journal`.
