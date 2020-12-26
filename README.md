@@ -9,13 +9,13 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 ## Releases
 
 * ~~***[Steam Workshop]()***~~
-* ***[Github](https://github.com/Shresht7/Take-Notes)***
+* ***[Github](https://github.com/HunterGhost27/Take-Notes)***
 * ~~***[Nexus]()***~~
 
 ## Requirements
 
 * ***[Script-Extender](https://github.com/Norbyte/ositools)***
-* ***[UI Components Library](https://github.com/Shresht7/UI-Components-Library)***
+* ***[UI Components Library](https://github.com/HunterGhost27/UI-Components-Library)***
 
 ## Features
 
@@ -77,7 +77,3 @@ The following console-commands are available for the player to use. The general 
 * **LaughingLeader** for the **[Source Control Generator](https://github.com/LaughingLeader/SourceControlGenerator)**.
 * **Norbyte** for The **[Script-Extender](https://github.com/Norbyte/ositools)**.
 * **Sebastian Lenz** and **LaughingLeader** for the **[VSCode extension](https://marketplace.visualstudio.com/items?itemName=sebastian-lenz.divinity-vscode)**.
-
-
-
-

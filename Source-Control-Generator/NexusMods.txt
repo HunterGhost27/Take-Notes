@@ -6,13 +6,13 @@ Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]cha
 [heading]Releases[/heading]
 [list]
 [*]~~[i][b][url=about:///]Steam Workshop[/url][/b][/i]~~
-[*][i][b][url=https://github.com/Shresht7/Take-Notes]Github[/url][/b][/i]
+[*][i][b][url=https://github.com/HunterGhost27/Take-Notes]Github[/url][/b][/i]
 [*]~~[i][b][url=about:///]Nexus[/url][/b][/i]~~
 [/list]
 [heading]Requirements[/heading]
 [list]
 [*][i][b][url=https://github.com/Norbyte/ositools]Script-Extender[/url][/b][/i]
-[*][i][b][url=https://github.com/Shresht7/UI-Components-Library]UI Components Library[/url][/b][/i]
+[*][i][b][url=https://github.com/HunterGhost27/UI-Components-Library]UI Components Library[/url][/b][/i]
 [/list]
 [heading]Features[/heading]
 [list]
