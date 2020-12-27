@@ -8,9 +8,8 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 
 ## Releases
 
-* ~~***[Steam Workshop]()***~~
+* ***[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2337247947)***
 * ***[Github](https://github.com/HunterGhost27/Take-Notes)***
-* ~~***[Nexus]()***~~
 
 ## Requirements
 

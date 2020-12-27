@@ -2,6 +2,10 @@
 
 ----------
 
+## [1.0.0.0] --- 27th December 2020 --- **_Initial Release_**
+
+* _Released_ the mod on the steam-workshop.
+
 ## [1.0.0.0] --- 23rd December 2020 --- **_Preparing for Release_**
 
 ### NEW
