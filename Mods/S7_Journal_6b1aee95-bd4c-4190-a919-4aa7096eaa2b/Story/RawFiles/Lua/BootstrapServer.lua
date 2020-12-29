@@ -83,7 +83,7 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
         S7DebugPrint(character .. " opened Journal", "BootstrapServer")
 
-        local fileName = PersistentVars.Settings.Storage == "External" and IDENTIFIER .. "/" or ""
+        local fileName = PersistentVars.Settings.Storage == "External" and SubdirectoryPrefix or ""
         if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".json"
         elseif PersistentVars.Settings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".json" end
 

@@ -1,5 +1,6 @@
 --  ------------------------------------------------------------
 ModInfo = Ext.GetModInfo("6b1aee95-bd4c-4190-a919-4aa7096eaa2b")
+SubdirectoryPrefix = "TakeNotes/"
 IDENTIFIER = "S7_Journal"
 --  ------------------------------------------------------------
 
@@ -111,6 +112,6 @@ function ResynchronizeModSettings()
     end
 end
 
---  =============================================================================
-Ext.RegisterListener("SessionLoaded", function () ResynchronizeModSettings() end)
---  =============================================================================
+--  ===========================================================
+Ext.RegisterListener("SessionLoaded", ResynchronizeModSettings)
+--  ===========================================================

@@ -28,11 +28,11 @@ local function exportPersistentJournals(param)
     if PersistentVars.JournalData then
         if string.lower(param) == "all" then
             for fileName, contents in pairs(PersistentVars.JournalData) do
-                SaveFile(IDENTIFIER .. "/" .. tostring(fileName), contents)
+                SaveFile(SubdirectoryPrefix .. tostring(fileName), contents)
                 S7DebugPrint("Exported: " .. tostring(fileName), "DevMode")
             end
         elseif PersistentVars.JournalData[param] then
-            SaveFile(IDENTIFIER .. "/" .. tostring(param), PersistentVars.JournalData[param])
+            SaveFile(SubdirectoryPrefix .. tostring(param), PersistentVars.JournalData[param])
             S7DebugPrint("Exported: " .. tostring(param), "DevMode")
         else S7DebugPrint("No match found: " .. tostring(param), "DevMode") end
     else S7DebugPrint("No entries in PersistentVars", "DevMode")
@@ -45,7 +45,7 @@ end
 --- Import file from OsirisData into PersistentVars
 ---@param param string fileName
 local function importFromOsirisData(param)
-    local file = LoadFile(IDENTIFIER .. "/" .. tostring(param) .. ".json")
+    local file = LoadFile(SubdirectoryPrefix .. tostring(param) .. ".json")
     if file then
         PersistentVars.JournalData[tostring(param) .. ".json"] = Ext.JsonParse(file)
         S7DebugPrint("Imported from OsirisData: " .. tostring(param), "DevMode")
