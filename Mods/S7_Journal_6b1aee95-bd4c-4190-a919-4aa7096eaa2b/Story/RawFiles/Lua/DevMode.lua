@@ -34,9 +34,8 @@ local function exportPersistentJournals(param)
         elseif PersistentVars.JournalData[param] then
             SaveFile(SubdirectoryPrefix .. tostring(param), PersistentVars.JournalData[param])
             S7Debug:Print("Exported: " .. tostring(param))
-        else S7Debug:Print("No match found: " .. tostring(param)) end
-    else S7Debug:Print("No entries in PersistentVars")
-    end
+        else S7Debug:Warn("No match found: " .. tostring(param)) end
+    else S7Debug:Warn("No entries in PersistentVars") end
 end
 
 --  IMPORT TO PERSISTENT JOURNALS
@@ -49,9 +48,7 @@ local function importFromOsirisData(param)
     if file then
         PersistentVars.JournalData[tostring(param) .. ".json"] = Ext.JsonParse(file)
         S7Debug:Print("Imported from OsirisData: " .. tostring(param))
-    else
-        S7Debug:Print("Could not import file: " .. tostring(param))
-    end
+    else S7Debug:Error("Could not import file: " .. tostring(param)) end
 end
 
 --  REMOVE JOURNAL DATA
@@ -66,7 +63,7 @@ local function removeJournalData(param)
     elseif PersistentVars.JournalData[tostring(param)] ~= nil then
         PersistentVars.JournalData[tostring(param)] = nil
         S7Debug:Print("Removed: " .. tostring(param))
-    else S7Debug:Print("Invalid Parameter") end
+    else S7Debug:Error("Invalid Parameter") end
 end
 
 --  =========================

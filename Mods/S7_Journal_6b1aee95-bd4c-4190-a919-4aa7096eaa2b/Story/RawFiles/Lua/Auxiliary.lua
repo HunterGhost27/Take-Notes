@@ -9,13 +9,14 @@ IDENTIFIER = "S7_Journal"
 --  =================
 
 UCL = Mods["S7_UI_Components_Library"]  --  Import UI Components Library
+if UCL == nil then S7Debug:HFError("Could Not Find UI Components Library!") end
+
 ValidString = UCL.ValidString
 Integrate = UCL.Integrate
 Rematerialize = UCL.Rematerialize
 S7Debug = UCL.S7Debug
 LoadFile = UCL.LoadFile
 SaveFile = UCL.SaveFile
-if UCL == nil then S7Debug:HFError("Could Not Find UI Components Library!") end
 
 --  ===============
 --  MOD INFORMATION
@@ -78,7 +79,7 @@ function ResynchronizeModSettings()
         for setting, value in pairs(CENTRAL[IDENTIFIER]["ModSettings"]) do
             if CENTRAL[IDENTIFIER]["ModSettings"][setting] ~= PersistentVars.Settings[setting] then
                 PersistentVars.Settings[setting] = value
-                S7Debug:FPrint(setting .. ": " .. tostring(value))
+                S7Debug:FPrint(setting .. ": " .. Ext.JsonStringify(Rematerialize(value)))
             end
         end
     end
