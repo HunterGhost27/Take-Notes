@@ -51,7 +51,7 @@ Journal = {
 
 function Journal:New(object)
     local object = object or {}
-    object = Integrate(object, self)
+    object = Integrate(self, object)
     return object
 end
 
