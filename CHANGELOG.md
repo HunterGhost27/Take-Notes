@@ -2,12 +2,12 @@
 
 ----------
 
-
 ## [1.0.1.0] --- 30th December 2020 --- **_Minor Improvements_**
 
 ### CHANGED
 
 * _Changed_ `OsirisData` subdirectory prefix to `TakeNotes`.
+* _Imported_ `S7Debug`.
 
 ## [1.0.0.0] --- 27th December 2020 --- **_Initial Release_**
 

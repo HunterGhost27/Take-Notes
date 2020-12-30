@@ -4,46 +4,18 @@ SubdirectoryPrefix = "TakeNotes/"
 IDENTIFIER = "S7_Journal"
 --  ------------------------------------------------------------
 
---  ===========
---  DEBUG PRINT
---  ===========
-
-function S7DebugPrint(...)
-    local args = {...}
-    local logMsg = args[1] or ""    -- The message to display
-    local logSource = args[2] or "" -- The Source/Origin of the message
-    local logType = args[3] or "Log"    -- The type of message (Log, Warning, Error)
-    local ignoreDevMode = args[4] or false  -- Print message regardless of DeveloperMode
-    local highlight = args[5] or false  -- Highlights the display message
-    local highlightChar = args[6] or "="    -- Highlighting character
-
-    if Ext.IsDeveloperMode() or ignoreDevMode then
-        local context = ""
-        if Ext.IsClient() then context = "C"
-        elseif Ext.IsServer() then context = "S" end
-
-        local logFunctions = {["Log"] = Ext.Print, ["Warning"] = Ext.PrintWarning, ["Error"] = Ext.PrintError}
-        local printFunction = logFunctions[logType]
-
-        local displayString = "[" .. IDENTIFIER .. ":Lua(" .. context .. "):" .. logSource .. "] --- " .. logMsg
-
-        if highlight then printFunction(string.rep(highlightChar, string.len(displayString))) end
-        printFunction(displayString)
-        if highlight then printFunction(string.rep(highlightChar, string.len(displayString))) end
-    end
-end
-
 --  =================
 --  IMPORT DEPENDENCY
 --  =================
 
 UCL = Mods["S7_UI_Components_Library"]  --  Import UI Components Library
 ValidString = UCL.ValidString
-Rematerialize = UCL.Rematerialize
 Integrate = UCL.Integrate
+Rematerialize = UCL.Rematerialize
+S7Debug = UCL.S7Debug
 LoadFile = UCL.LoadFile
 SaveFile = UCL.SaveFile
-if UCL == nil then S7DebugPrint("Could Not Find UI Components Library!", "Auxiliary", "Error", true, true, "*") end
+if UCL == nil then S7Debug:HFError("Could Not Find UI Components Library!") end
 
 --  ===============
 --  MOD INFORMATION
@@ -102,11 +74,11 @@ PersistentVars.Settings = Rematerialize(CENTRAL[IDENTIFIER]["ModSettings"])
 function ResynchronizeModSettings()
     CENTRAL = LoadFile("S7Central.json") or {}
     if Ext.JsonStringify(PersistentVars.Settings) ~= Ext.JsonStringify(CENTRAL[IDENTIFIER]["ModSettings"]) then
-        S7DebugPrint("Synchronizing ModSettings", "Auxiliary", "Log", true, true)
+        S7Debug:HFPrint("Synchronizing ModSettings")
         for setting, value in pairs(CENTRAL[IDENTIFIER]["ModSettings"]) do
             if CENTRAL[IDENTIFIER]["ModSettings"][setting] ~= PersistentVars.Settings[setting] then
                 PersistentVars.Settings[setting] = value
-                S7DebugPrint(setting .. ": " .. tostring(value), "Auxiliary", "Log", true)
+                S7Debug:FPrint(setting .. ": " .. tostring(value))
             end
         end
     end

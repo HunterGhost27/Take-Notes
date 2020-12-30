@@ -8,7 +8,7 @@
 --- Add Journal to HostCharacter
 local function addJournal()
     Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
-    S7DebugPrint("BOOK_S7_Notebook Added to Host's Inventory", "DevMode")
+    S7Debug:Print("BOOK_S7_Notebook Added to Host's Inventory")
 end
 
 --  LIST PERSISTENT JOURNALS
@@ -16,7 +16,7 @@ end
 
 --- List Journal entries in PersistentVars
 local function listPersistentJournals()
-    if PersistentVars.JournalData then for fileName, _ in pairs(PersistentVars.JournalData) do S7DebugPrint(fileName, "DevMode") end end
+    if PersistentVars.JournalData then for fileName, _ in pairs(PersistentVars.JournalData) do S7Debug:Print(fileName) end end
 end
 
 --  EXPORT PERSISTENT JOURNALS
@@ -29,13 +29,13 @@ local function exportPersistentJournals(param)
         if string.lower(param) == "all" then
             for fileName, contents in pairs(PersistentVars.JournalData) do
                 SaveFile(SubdirectoryPrefix .. tostring(fileName), contents)
-                S7DebugPrint("Exported: " .. tostring(fileName), "DevMode")
+                S7Debug:Print("Exported: " .. tostring(fileName))
             end
         elseif PersistentVars.JournalData[param] then
             SaveFile(SubdirectoryPrefix .. tostring(param), PersistentVars.JournalData[param])
-            S7DebugPrint("Exported: " .. tostring(param), "DevMode")
-        else S7DebugPrint("No match found: " .. tostring(param), "DevMode") end
-    else S7DebugPrint("No entries in PersistentVars", "DevMode")
+            S7Debug:Print("Exported: " .. tostring(param))
+        else S7Debug:Print("No match found: " .. tostring(param)) end
+    else S7Debug:Print("No entries in PersistentVars")
     end
 end
 
@@ -48,9 +48,9 @@ local function importFromOsirisData(param)
     local file = LoadFile(SubdirectoryPrefix .. tostring(param) .. ".json")
     if file then
         PersistentVars.JournalData[tostring(param) .. ".json"] = Ext.JsonParse(file)
-        S7DebugPrint("Imported from OsirisData: " .. tostring(param), "DevMode")
+        S7Debug:Print("Imported from OsirisData: " .. tostring(param))
     else
-        S7DebugPrint("Could not import file: " .. tostring(param), "DevMode")
+        S7Debug:Print("Could not import file: " .. tostring(param))
     end
 end
 
@@ -62,11 +62,11 @@ end
 local function removeJournalData(param)
     if string.lower(tostring(param)) == "all" then
         PersistentVars.JournalData = nil
-        S7DebugPrint("Removed all entries from PersistentVars", "DevMode")
+        S7Debug:Print("Removed all entries from PersistentVars")
     elseif PersistentVars.JournalData[tostring(param)] ~= nil then
         PersistentVars.JournalData[tostring(param)] = nil
-        S7DebugPrint("Removed: " .. tostring(param), "DevMode")
-    else S7DebugPrint("Invalid Parameter", "DevMode") end
+        S7Debug:Print("Removed: " .. tostring(param))
+    else S7Debug:Print("Invalid Parameter") end
 end
 
 --  =========================

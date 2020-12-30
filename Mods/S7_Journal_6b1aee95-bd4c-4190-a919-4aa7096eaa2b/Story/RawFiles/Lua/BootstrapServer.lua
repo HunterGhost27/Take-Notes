@@ -4,6 +4,27 @@
 
 Ext.Require("Auxiliary.lua")
 
+if Ext.IsDeveloperMode() then Ext.Require("DevMode.lua") end
+
+--  ==========================
+--  GRANT UNIQUES ON GAMESTART
+--  ==========================
+
+if CENTRAL[IDENTIFIER].ModSettings.Uniques then
+    Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
+        if Osi.IsGameLevel(level) then
+            local db = Osi.DB_IsPlayer:Get(nil)[1]
+            if db then
+                for _, player in pairs(db) do
+                    if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
+                        Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1)
+                    end
+                end
+            end
+        end
+    end)
+end
+
 --  ======
 --  VARDEC
 --  ======
@@ -38,8 +59,6 @@ end
 S7Journal = Journal:New()
 --  =====================
 
---  ####################################################################################################################################################
-
 --  ============
 --  LOAD JOURNAL
 --  ============
@@ -47,10 +66,10 @@ S7Journal = Journal:New()
 --- Load Journal
 ---@param fileName string
 local function LoadJournal(fileName)
-    S7DebugPrint("Loading Journal File: " .. fileName, "BootstrapServer")
+    S7Debug:Print("Loading Journal File: " .. fileName)
     local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or {}
     S7Journal = Journal:New(file)
-    S7DebugPrint("Loaded Successfully", "BootstrapServer")
+    S7Debug:Print("Loaded Successfully")
 end
 
 --  ============
@@ -63,10 +82,10 @@ end
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
-        S7DebugPrint("Saving Journal File: " .. journal.fileName, "BootstrapServer")
+        S7Debug:Print("Saving Journal File: " .. journal.fileName)
         if PersistentVars.Settings.Storage == "External" then SaveFile(journal.fileName, journal.Data)
         elseif PersistentVars.Settings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
-        S7DebugPrint("Saved Successfully", "BootstrapServer")
+        S7Debug:Print("Saved Successfully")
     end
 end)
 
@@ -81,7 +100,7 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
         if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
-        S7DebugPrint(character .. " opened Journal", "BootstrapServer")
+        S7Debug:Print(character .. " opened Journal")
 
         local fileName = PersistentVars.Settings.Storage == "External" and SubdirectoryPrefix or ""
         if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".json"
@@ -93,28 +112,3 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         Ext.PostMessageToClient(character, IDENTIFIER, Ext.JsonStringify(payload))
     end
 end)
-
---  ==========================
---  GRANT UNIQUES ON GAMESTART
---  ==========================
-
-if CENTRAL[IDENTIFIER].ModSettings.Uniques then
-    Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
-        if Osi.IsGameLevel(level) then
-            local db = Osi.DB_IsPlayer:Get(nil)[1]
-            if db then
-                for _, player in pairs(db) do
-                    if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
-                        Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1)
-                    end
-                end
-            end
-        end
-    end)
-end
-
---  ==================
---  REQUIRE DEBUG MODE
---  ==================
-
-if Ext.IsDeveloperMode() then Ext.Require("DevMode.lua") end
