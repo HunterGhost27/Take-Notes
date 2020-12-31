@@ -14,9 +14,11 @@ if UCL == nil then S7Debug:HFError("Could Not Find UI Components Library!") end
 ValidString = UCL.ValidString
 Integrate = UCL.Integrate
 Rematerialize = UCL.Rematerialize
-S7Debug = UCL.S7Debug
 LoadFile = UCL.LoadFile
 SaveFile = UCL.SaveFile
+S7Debug = UCL.S7Debug
+
+S7Debug['IDENTIFIER'] = IDENTIFIER
 
 --  ===============
 --  MOD INFORMATION
