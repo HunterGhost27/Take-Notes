@@ -6,12 +6,16 @@ Ext.Require("Auxiliary.lua")
 
 if Ext.IsDeveloperMode() then Ext.Require("DevMode.lua") end
 
---  ==========================
---  GRANT UNIQUES ON GAMESTART
---  ==========================
+--  =================
+--  GAME START EVENTS
+--  =================
 
-if CENTRAL[IDENTIFIER].ModSettings.Uniques then
-    Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
+Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
+
+    --  GRANT UNIQUES
+    --  =============
+
+    if CENTRAL[IDENTIFIER].ModSettings.Uniques then
         if Osi.IsGameLevel(level) then
             local db = Osi.DB_IsPlayer:Get(nil)[1]
             if db then
@@ -22,8 +26,8 @@ if CENTRAL[IDENTIFIER].ModSettings.Uniques then
                 end
             end
         end
-    end)
-end
+    end
+end)
 
 --  ======
 --  VARDEC
