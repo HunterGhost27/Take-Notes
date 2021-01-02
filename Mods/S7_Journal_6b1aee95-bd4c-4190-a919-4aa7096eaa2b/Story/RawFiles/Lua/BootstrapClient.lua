@@ -41,3 +41,12 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
         SaveJournal()
     end
 end)
+
+--  ===================
+--  HANDLE MOD-SETTINGS
+--  ===================
+
+Ext.RegisterNetListener("CharacterOpenModSettings", function (channel, payload)
+    local payload = Ext.JsonParse(payload)
+    UCL.UCLBuild(payload)
+end)

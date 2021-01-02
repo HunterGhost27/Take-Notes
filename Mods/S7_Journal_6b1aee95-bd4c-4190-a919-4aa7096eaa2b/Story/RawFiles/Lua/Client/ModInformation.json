@@ -1,0 +1,23 @@
+{
+    "GMJournal": {
+        "Component": {
+            "Layer": 10,
+            "Name": "S7Journal",
+            "Strings": {
+                "addCategory": "Add New Category",
+                "addChapter": "Add New Chapter",
+                "addParagraph": "Add New Paragraph",
+                "caption": "Take Notes",
+                "editButtonCaption": "TOGGLE EDIT MODE",
+                "shareWithParty": "Share With Party"
+            }
+        },
+        "JournalData": {},
+        "SubComponent": {
+            "ToggleEditButton": {
+                "Title": "ToggleEditButton",
+                "Visible": false
+            }
+        }
+    }
+}
