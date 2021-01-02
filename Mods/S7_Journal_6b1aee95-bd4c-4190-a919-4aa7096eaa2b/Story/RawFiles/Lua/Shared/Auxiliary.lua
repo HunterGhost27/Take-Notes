@@ -41,9 +41,9 @@ local modInfoTable = {
 CENTRAL = LoadFile("S7Central.json") or {} --  Holds Global Settings and Information
 if CENTRAL[IDENTIFIER] == nil then CENTRAL[IDENTIFIER] = Rematerialize(modInfoTable) end
 
---  ====  MOD VERSIONING  ======
-Ext.Require("ModVersioning.lua")
---  ============================
+--  ========  MOD VERSIONING  =========
+Ext.Require("Shared/ModVersioning.lua")
+--  ===================================
 
 --- Initialize CENTRAL
 ---@param ref table Reference table

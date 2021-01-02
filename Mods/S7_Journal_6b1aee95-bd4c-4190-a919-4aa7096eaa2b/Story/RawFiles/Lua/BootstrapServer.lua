@@ -2,9 +2,8 @@
 --  IMPORT
 --  ======
 
-Ext.Require("Auxiliary.lua")
-
-if Ext.IsDeveloperMode() then Ext.Require("DevMode.lua") end
+Ext.Require("Shared/Auxiliary.lua")
+if Ext.IsDeveloperMode() then Ext.Require("Server/DevMode.lua") end
 
 --  =================
 --  GAME START EVENTS

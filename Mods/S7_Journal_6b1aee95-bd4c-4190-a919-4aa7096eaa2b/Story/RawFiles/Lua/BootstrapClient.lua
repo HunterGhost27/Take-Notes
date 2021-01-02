@@ -2,8 +2,8 @@
 --  IMPORTS
 --  =======
 
-Ext.Require("Auxiliary.lua")
-Ext.Require("TreasureTables.lua")
+Ext.Require("Shared/Auxiliary.lua")
+Ext.Require("Client/TreasureTables.lua")
 
 --  ==================
 --  FETCH JOURNAL DATA
@@ -11,7 +11,7 @@ Ext.Require("TreasureTables.lua")
 
 FileName = ""
 local function SaveJournal()
-    local journal = {
+    local saveData = {
         ["ID"] = "SaveJournal",
         ["fileName"] = FileName,
         ["Data"] = {
@@ -20,7 +20,7 @@ local function SaveJournal()
             ["JournalData"] = Rematerialize(UCL.Journal.JournalData)
         }
     }
-    Ext.PostMessageToServer(IDENTIFIER, Ext.JsonStringify(journal))
+    Ext.PostMessageToServer(IDENTIFIER, Ext.JsonStringify(saveData))
 end
 
 --  ==============
@@ -31,7 +31,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "CharacterOpenJournal" then
         FileName = journal.Data.fileName
-        S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library.")
+        S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
         local BuildSpecs = {["GMJournal"] = Rematerialize(journal.Data.content)}
         if not UCL.Journal.Exists then
             UCL.UCLBuild(BuildSpecs)
