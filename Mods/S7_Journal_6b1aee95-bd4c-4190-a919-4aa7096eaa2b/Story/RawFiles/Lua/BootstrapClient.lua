@@ -3,6 +3,7 @@
 --  =======
 
 Ext.Require("Shared/Auxiliary.lua")
+Ext.Require("Client/ContextMenu.lua")
 Ext.Require("Client/TreasureTables.lua")
 
 --  ==================

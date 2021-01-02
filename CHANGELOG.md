@@ -2,6 +2,12 @@
 
 ----------
 
+## [1.1.0.0] --- 2nd January 2021 --- **_ContextMenu_**
+
+### NEW
+
+* _Integrated_ (experimental) `ContextMenu` from UI Components Library.
+
 ## [1.0.1.0] --- 30th December 2020 --- **_Minor Improvements_**
 
 ### CHANGED

@@ -3,7 +3,9 @@
 --  ======
 
 Ext.Require("Shared/Auxiliary.lua")
-if Ext.IsDeveloperMode() then Ext.Require("Server/DevMode.lua") end
+Ext.Require("Server/ContextMenuHandler.lua")
+
+if Ext.IsDeveloperMode() then Ext.Require("Server/Development/DevMode.lua") end
 
 --  =================
 --  GAME START EVENTS
