@@ -12,6 +12,7 @@ UCL = Mods["S7_UI_Components_Library"]  --  Import UI Components Library
 if UCL == nil then S7Debug:HFError("Could Not Find UI Components Library!") end
 
 ValidString = UCL.ValidString
+Color = UCL.Color
 Integrate = UCL.Integrate
 Rematerialize = UCL.Rematerialize
 LoadFile = UCL.LoadFile
