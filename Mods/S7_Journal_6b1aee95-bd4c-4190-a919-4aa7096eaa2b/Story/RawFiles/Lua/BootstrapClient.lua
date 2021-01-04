@@ -12,6 +12,8 @@ Ext.Require("Client/TreasureTables.lua")
 
 FileName = ""
 local function SaveJournal()
+    if UCL.Journal.Component.Name ~= "S7_Notebook" then return end
+    S7Debug:Print("Saving " .. UCL.Journal.Component.Name)
     local saveData = {
         ["ID"] = "SaveJournal",
         ["fileName"] = FileName,
@@ -30,10 +32,12 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
         FileName = journal.Data.fileName
         S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
         local BuildSpecs = Rematerialize(journal.Data.content)
-        if not UCL.Journal.Exists then
-            UCL.UCLBuild(BuildSpecs)
-            Ext.RegisterUICall(UCL.Journal.UI, "S7_Journal_UI_Hide", function (ui, call, ...) SaveJournal(); UCL.UnloadJournal() end)
-        else UCL.UCLBuild(BuildSpecs) end
-        SaveJournal()
+        BuildSpecs = Integrate(BuildSpecs, {["GMJournal"] = {
+            ["Component"] = {
+                ["Name"] = "S7_Notebook",
+                ["Listeners"] = {["S7_Journal_UI_Hide"] = function(ui, call, ...) SaveJournal() end}
+            }
+        }})
+        UCL.UCLBuild(BuildSpecs)
     end
 end)
