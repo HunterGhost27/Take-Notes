@@ -5,7 +5,7 @@
 
 Ext.RegisterListener("StatsLoaded", function()
     local stat = Ext.GetStat("BOOK_S7_JournalStat")
-    stat.Unique = CENTRAL[IDENTIFIER].ModSettings.Uniques
+    stat.Unique = CENTRAL[IDENTIFIER].ModSettings.Uniques and 1 or 0
 
     if not CENTRAL[IDENTIFIER].ModSettings.Uniques then
         local treasureCat = {
