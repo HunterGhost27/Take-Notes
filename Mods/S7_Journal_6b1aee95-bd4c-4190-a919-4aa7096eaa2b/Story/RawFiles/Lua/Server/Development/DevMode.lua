@@ -44,9 +44,9 @@ end
 --- Import file from OsirisData into PersistentVars
 ---@param param string fileName
 local function importFromOsirisData(param)
-    local file = LoadFile(SubdirectoryPrefix .. tostring(param) .. ".json")
+    local file = LoadFile(SubdirectoryPrefix .. tostring(param) .. ".md")
     if file then
-        PersistentVars.JournalData[tostring(param) .. ".json"] = Ext.JsonParse(file)
+        PersistentVars.JournalData[tostring(param) .. ".md"] = Ext.JsonParse(file)
         S7Debug:Print("Imported from OsirisData: " .. tostring(param))
     else S7Debug:Error("Could not import file: " .. tostring(param)) end
 end

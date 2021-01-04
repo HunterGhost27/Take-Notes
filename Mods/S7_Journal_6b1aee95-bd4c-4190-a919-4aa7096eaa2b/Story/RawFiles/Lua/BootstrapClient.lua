@@ -15,11 +15,7 @@ local function SaveJournal()
     local saveData = {
         ["ID"] = "SaveJournal",
         ["fileName"] = FileName,
-        ["Data"] = {
-            ["Component"] = Rematerialize(UCL.Journal.Component),
-            ["SubComponent"] = Rematerialize(UCL.Journal.SubComponent),
-            ["JournalData"] = Rematerialize(UCL.Journal.JournalData)
-        }
+        ["Data"] = UCL.Markdownify(UCL.Journal)
     }
     Ext.PostMessageToServer(IDENTIFIER, Ext.JsonStringify(saveData))
 end
@@ -33,20 +29,11 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     if journal.ID == "CharacterOpenJournal" then
         FileName = journal.Data.fileName
         S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
-        local BuildSpecs = {["GMJournal"] = Rematerialize(journal.Data.content)}
+        local BuildSpecs = Rematerialize(journal.Data.content)
         if not UCL.Journal.Exists then
             UCL.UCLBuild(BuildSpecs)
             Ext.RegisterUICall(UCL.Journal.UI, "S7_Journal_UI_Hide", function (ui, call, ...) SaveJournal(); UCL.UnloadJournal() end)
         else UCL.UCLBuild(BuildSpecs) end
         SaveJournal()
     end
-end)
-
---  ===================
---  HANDLE MOD-SETTINGS
---  ===================
-
-Ext.RegisterNetListener("CharacterOpenModSettings", function (channel, payload)
-    local payload = Ext.JsonParse(payload)
-    UCL.UCLBuild(payload)
 end)
