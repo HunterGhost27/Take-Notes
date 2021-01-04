@@ -8,7 +8,7 @@
 --- Add Journal to HostCharacter
 local function addJournal()
     Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
-    S7Debug:Print("BOOK_S7_Notebook Added to Host's Inventory")
+    S7Debug:Print("BOOK_S7_Notebook added to host's inventory")
 end
 
 --  LIST PERSISTENT JOURNALS
@@ -44,9 +44,9 @@ end
 --- Import file from OsirisData into PersistentVars
 ---@param param string fileName
 local function importFromOsirisData(param)
-    local file = LoadFile(SubdirectoryPrefix .. tostring(param) .. ".md")
+    local file = LoadFile(SubdirectoryPrefix .. tostring(param))
     if file then
-        PersistentVars.JournalData[tostring(param) .. ".md"] = Ext.JsonParse(file)
+        PersistentVars.JournalData[tostring(param)] = file
         S7Debug:Print("Imported from OsirisData: " .. tostring(param))
     else S7Debug:Error("Could not import file: " .. tostring(param)) end
 end

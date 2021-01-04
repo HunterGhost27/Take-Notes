@@ -10,14 +10,12 @@ if Ext.IsDeveloperMode() then Ext.Require("Server/Development/DevMode.lua") end
 --  =================
 
 Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
-    if CENTRAL[IDENTIFIER].ModSettings.Uniques then
-        if Osi.IsGameLevel(level) then
-            local db = Osi.DB_IsPlayer:Get(nil)[1]
-            if db then
-                for _, player in pairs(db) do
-                    if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
-                        Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1)
-                    end
+    if Osi.IsGameLevel(level) then
+        if CENTRAL[IDENTIFIER].ModSettings.Uniques then
+            local db = Osi.DB_IsPlayer:Get(nil)[1] or {}
+            for _, player in pairs(db) do
+                if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
+                    Osi.ItemTemplateAddTo(JournalTemplate, player, 1, 1)
                 end
             end
         end
@@ -31,6 +29,7 @@ end)
 Journal = {
     ["GMJournal"] = {
         ["Component"] = {
+            ["Name"] = "S7_Notebook",
             ["Strings"] = {
                 ["caption"] = "Notebook",
                 ["addCategory"] = "Add New Category",
