@@ -40,7 +40,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
         Notebook.FileName = journal.Data.fileName
         S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
         local BuildSpecs = Rematerialize(journal.Data.content)
-        BuildSpecs = Integrate(BuildSpecs, {["GMJournal"] = {["Component"] = {["Listeners"] = {["S7_Journal_UI_Hide"] = function(ui, call, ...) SaveJournal() end}}}})
+        BuildSpecs = Integrate(BuildSpecs, {["GMJournal"] = {["Component"] = {["Listeners"] = {["Before:S7_Journal_UI_Hide"] = function(ui, call, ...) SaveJournal() end}}}})
         Notebook.Data = UCL.UCLBuild(BuildSpecs)
     end
 end)
