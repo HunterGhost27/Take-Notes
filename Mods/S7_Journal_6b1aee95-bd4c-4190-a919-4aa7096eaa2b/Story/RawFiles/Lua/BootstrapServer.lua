@@ -107,6 +107,9 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".md"
         elseif PersistentVars.Settings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".md" end
 
+        local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
+        local len = string.len(file)
+        item.GoldValueOverwrite = Ext.StatGetAttribute(item.StatsId, "Value") + math.floor(len/3)
         LoadJournal(fileName)
         item.CustomDisplayName = S7Journal.GMJournal.Component.Strings.caption
         local payload = {["ID"] = "CharacterOpenJournal", ["Data"] = {["fileName"] = fileName, ["content"] = S7Journal}}

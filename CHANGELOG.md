@@ -8,6 +8,7 @@
 
 * _Integrated_ (experimental) `ContextMenu` from UI Components Library.
 * _Changed_ to `markdown` files.
+* _GoldaValue_ of notebooks scales with the contents.
 
 ## [1.0.1.0] --- 30th December 2020 --- **_Minor Improvements_**
 
