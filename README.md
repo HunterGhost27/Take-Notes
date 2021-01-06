@@ -22,8 +22,10 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 * The mod adds **editable notebooks** to **Story** and **GM modes**.
 * _Notebooks_ have been integrated into vanilla _treasure-tables_. They will appear as **loot** and you can buy them from traders.
 * _Notebooks_ can also be **crafted**. `LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper`
-* _Create_, _View_, and _Edit_ your entries from an in-game UI.
+* _Create_, _View_, and _Edit_ your entries from an in-game UI or externally as markdown.
 * Notebook contents can be saved on a _per-character_ or _per-item basis_.
+* The _Gold Value_ of notebooks scales with their contents.
+* You can read about the mod from the in-game _mod-information_ context-menu option.
 
 ![Journal](https://imgur.com/tHcOoGF.png)
 
@@ -52,21 +54,6 @@ Notebook contents can be saved on a per-character or per-item basis.
 
 * **`CharacterGUID`**: If saved on a per-character basis, each character will have a unique notebook. Opening any notebook item will always open the one associated to them.
 * **`ItemGUID`**: When synced on a per-item basis, each notebook will hold its own content. (Default)
-
-## Console-Commands
-
-The following console-commands are available for the player to use. The general format for the commands is `!S7_Journal <Command> <Arguments>`.
-
-| command                                  | result                                                                        |
-| ---------------------------------------- | ----------------------------------------------------------------------------- |
-| `AddJournal`                             | A new notebook will be added to the host character's inventory                |
-| `ResyncSettings`                         | Reloads and reapplies mod-settings from the `S7Central.json` file             |
-| `ListPersistentJournals`                 | Prints a list of saved entries in PersistentVars                              |
-| `ExportPersistentJournals <JournalName>` | Export entry from PersistentVars to OsirisData. Use `all` to export all       |
-| `ImportFromOsirisData <JournalName>`     | Import entry from OsirisData.                                                 |
-| `RemoveJournal <JournalName>`            | Removes the entry from PersistentVars. Use `all` to clear persistent-vars out |
-
->Note: Console-Commands need the script-extender's **debug-console** which can be enabled by setting `DeveloperMode` and `CreateConsole` to true in `OsirisExtenderSettings.json`.
 
 ----------
 

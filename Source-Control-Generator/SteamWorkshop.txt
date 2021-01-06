@@ -18,6 +18,8 @@ Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]cha
 [*][i]Notebooks[/i] can also be [b]crafted[/b]. [code]LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper[/code]
 [*][i]Create[/i], [i]View[/i], and [i]Edit[/i] your entries from an in-game UI.
 [*]Notebook contents can be saved on a [i]per-character[/i] or [i]per-item basis[/i].
+[*]The [i]Gold Value[/i] of notebooks scales with their contents.
+[*]You can read about the mod from the in-game [i]mod-information[/i] context-menu option.
 [/list]
 [img]https://imgur.com/tHcOoGF.png[/img]
 [b]NOTE[/b]: The notebook contents are [i]saved[/i] when the UI is closed. So make sure to close it when you're done. This is especially important to keep in mind if you use multiple notebooks. Opening a different notebook when the UI is open will cause the contents to get mixed-up. Just close the first one before you open the next.
