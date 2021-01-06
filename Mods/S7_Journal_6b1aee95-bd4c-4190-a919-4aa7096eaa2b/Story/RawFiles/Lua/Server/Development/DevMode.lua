@@ -25,6 +25,7 @@ end
 --- Export PersistentVars to OsirisData
 ---@param param string fileName or 'all'
 local function exportPersistentJournals(param)
+    local param = param or "all"
     if PersistentVars.JournalData then
         if string.lower(param) == "all" then
             for fileName, contents in pairs(PersistentVars.JournalData) do
