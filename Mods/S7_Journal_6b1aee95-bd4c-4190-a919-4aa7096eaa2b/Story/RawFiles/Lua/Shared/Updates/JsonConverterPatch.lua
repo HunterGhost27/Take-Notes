@@ -21,7 +21,7 @@ Ext.RegisterListener('SessionLoaded', function()
     for fileName, fileContents in pairs(PersistentVars.JournalData) do
         if fileName:match(".json") then
             S7Debug:FWarn("Deprecated External JSON JournalData detected. Patching...")
-            UCL.Destringify(fileContents)
+            Destringify(fileContents)
             local specs = UCL.Journalify(fileContents)
             local md = UCL.Markdownify(specs.GMJournal)
             local newFileName = fileName:sub(0, -5) .. "md"

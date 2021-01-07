@@ -15,9 +15,10 @@ ValidString = UCL.ValidString
 Color = UCL.Color
 Integrate = UCL.Integrate
 Rematerialize = UCL.Rematerialize
+S7Debug = UCL.S7Debug
+Destringify = Destringify
 LoadFile = UCL.LoadFile
 SaveFile = UCL.SaveFile
-S7Debug = UCL.S7Debug
 
 S7Debug['IDENTIFIER'] = IDENTIFIER
 

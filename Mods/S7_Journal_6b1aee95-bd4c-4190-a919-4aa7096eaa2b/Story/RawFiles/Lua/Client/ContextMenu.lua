@@ -16,7 +16,7 @@ UCL.ContextMenu:Register({
 
 Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
     local payload = Ext.JsonParse(payload) or {}
-    UCL.Destringify(payload)
+    Destringify(payload)
     if payload.actionID == 27001 then
         local manual = LoadFile("Mods/S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b/ModInformation.md", "data")
         local replacers = {
