@@ -7,20 +7,23 @@ Ext.RegisterListener('SessionLoaded', function()
     --  LOAD EXTERNAL FILES
     --  ===================
 
-    local fileList = LoadFile("TakeNotes/fileList.json")
+    local fileList = LoadFile(SubdirectoryPrefix .."fileList.json")
     for _, fileName in pairs(fileList) do
-        local file = LoadFile("TakeNotes/" .. fileName)
-        PersistentVars.JournalData[fileName] = file
+        if fileName:match(".json") then
+            local file = LoadFile(SubdirectoryPrefix .. fileName)
+            PersistentVars.JournalData[fileName] = file
+        end
     end
 
     --  PATCH PERSISTENT-VARS
     --  =====================
 
     for fileName, fileContents in pairs(PersistentVars.JournalData) do
-        if string.match(fileName, ".json") then
+        if fileName:match(".json") then
             S7Debug:FWarn("Deprecated External JSON JournalData detected. Patching...")
+            UCL.Destringify(fileContents)
             local specs = UCL.Journalify(fileContents)
-            local md = UCL.Markdownify(specs.GMJournal.JournalData)
+            local md = UCL.Markdownify(specs.GMJournal)
             local newFileName = fileName:sub(0, -5) .. "md"
             PersistentVars.JournalData[newFileName] = md
             PersistentVars.JournalData[fileName] = nil
@@ -34,7 +37,8 @@ Ext.RegisterListener('SessionLoaded', function()
     for _, fileName in pairs(fileList) do
         local newFileName = fileName:sub(0, -5) .. "md"
         if PersistentVars.JournalData[newFileName] then
-            SaveFile(newFileName, PersistentVars.JournalData[newFileName])
+            SaveFile(SubdirectoryPrefix .. newFileName, PersistentVars.JournalData[newFileName])
+            PersistentVars.JournalData[newFileName] = nil
             S7Debug:FWarn("Resaving " .. fileName .. " as " .. newFileName)
         end
     end

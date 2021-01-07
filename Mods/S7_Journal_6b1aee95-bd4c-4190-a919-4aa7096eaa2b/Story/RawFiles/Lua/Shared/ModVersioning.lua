@@ -86,4 +86,4 @@ ModUpdater(prevVersion, currVersion)
 --  LOAD PATCHES
 --  ============
 
-Ext.Require("Shared/Updates/JsonConvertedPatch.lua")
+Ext.Require("Shared/Updates/JsonConverterPatch.lua")
