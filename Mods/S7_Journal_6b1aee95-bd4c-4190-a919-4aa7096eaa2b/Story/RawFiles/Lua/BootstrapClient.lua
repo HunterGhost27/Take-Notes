@@ -12,7 +12,7 @@ Ext.Require("Client/TreasureTables.lua")
 
 Notebook = {
     ["FileName"] = "",
-    -- ["Data"] = {},
+    ["Data"] = {},
 }
 
 --  ==================
