@@ -8,6 +8,7 @@ Ext.RegisterListener('SessionLoaded', function()
     --  ===================
 
     local fileList = LoadFile(SubdirectoryPrefix .."fileList.json")
+    if type(fileList) ~= 'table' then return end 
     for _, fileName in pairs(fileList) do
         if fileName:match(".json") then
             local file = LoadFile(SubdirectoryPrefix .. fileName)

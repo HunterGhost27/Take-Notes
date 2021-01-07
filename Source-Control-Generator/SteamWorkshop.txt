@@ -24,27 +24,6 @@ Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]cha
 [img]https://imgur.com/tHcOoGF.png[/img]
 [b]NOTE[/b]: The notebook contents are [i]saved[/i] when the UI is closed. So make sure to close it when you're done. This is especially important to keep in mind if you use multiple notebooks. Opening a different notebook when the UI is open will cause the contents to get mixed-up. Just close the first one before you open the next.
 
-[h2]ModSettings[/h2]
-Players can change mod-settings by editing the global settings file ([b]S7Central.json[/b]) in the [b]Osiris Data[/b] folder. ([b]..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json[/b]). The internal identifier for the mod is [b]S7_Journal[/b].
-
-[h3]Uniques[/h3]
-The [b]Uniques[/b] option is for people who want access to these notebooks from the very beginning. However only one will spawn per player character.
-[list]
-[*]if [b]Uniques[/b] is set to [b]true[/b], each player will be granted one unique notebook when the game starts. They will not spawn as loot or treasure however. (Default: [b]false[/b])
-[/list]
-[h3]Storage[/h3]
-Storage mode dictates how the contents of the notebooks are saved.
-[list]
-[*][b]Internal[/b]: storage mode saves the contents of the notebooks in the save-file itself. Notebook contents will be a part of your save. (Default)
-[*][b]External[/b]: storage mode saves the contents of the notebooks in an external json file in [b]Osiris Data[/b]. This allows you to edit them outside the game.
-[/list]
-[h3]SyncTo[/h3]
-Notebook contents can be saved on a per-character or per-item basis.
-[list]
-[*][b]CharacterGUID[/b]: If saved on a per-character basis, each character will have a unique notebook. Opening any notebook item will always open the one associated to them.
-[*][b]ItemGUID[/b]: When synced on a per-item basis, each notebook will hold its own content. (Default)
-[/list]
-
 [h1]Thanks and Credits[/h1]
 [list]
 [*][url=http://store.steampowered.com/app/435150/Divinity_Original_Sin_2/][b]Divinity: Original Sin 2[/b][/url], a game by [b][url=http://larian.com/]Larian Studios[/url][/b].
