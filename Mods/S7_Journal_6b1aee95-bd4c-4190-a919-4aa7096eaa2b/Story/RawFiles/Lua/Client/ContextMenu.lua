@@ -14,7 +14,7 @@ UCL.ContextMenu:Register({
     }
 })
 
-Ext.RegisterNetListener("S7UCL_ContextMenu", function (channel, payload)
+Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
     local payload = Ext.JsonParse(payload) or {}
     UCL.Destringify(payload)
     if payload.actionID == 271 then
