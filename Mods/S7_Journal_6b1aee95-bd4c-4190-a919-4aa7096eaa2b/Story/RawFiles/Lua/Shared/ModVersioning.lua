@@ -43,8 +43,9 @@ function ParseVersion(version, returnMode)
     end
 end
 
+--  =======
 --  UPDATER
---  -------
+--  =======
 
 local prevVersion = {[1] = 0, [2] = 0, [3] = 0, [4] = 0}
 if CENTRAL[IDENTIFIER] ~= nil and CENTRAL[IDENTIFIER]["Version"] ~= nil then
@@ -80,3 +81,9 @@ end
 --  ================================
 ModUpdater(prevVersion, currVersion)
 --  ================================
+
+--  ============
+--  LOAD PATCHES
+--  ============
+
+Ext.Require("Shared/Updates/JsonConvertedPatch.lua")
