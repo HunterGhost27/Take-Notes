@@ -5,7 +5,7 @@
 UCL.ContextMenu:Register({
     ["RootTemplate::" .. JournalTemplate] = {
         {
-            ['actionID'] = 271,
+            ['actionID'] = 27001,
             ['clickSound'] = true,
             ['text'] = Color:Blue("Mod Information"),
             ['isDisabled'] = false,
@@ -17,7 +17,7 @@ UCL.ContextMenu:Register({
 Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
     local payload = Ext.JsonParse(payload) or {}
     UCL.Destringify(payload)
-    if payload.actionID == 271 then
+    if payload.actionID == 27001 then
         local manual = LoadFile("Mods/S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b/ModInformation.md", "data")
         local replacers = {
             {["?TakeNotesVersion"] = ParseVersion(ModInfo.Version, 'string')}, {["?TakeNotesAuthor"] = ModInfo.Author},
