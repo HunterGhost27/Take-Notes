@@ -72,7 +72,6 @@ local function ModUpdater(oldVersion, newVersion, forceUpdate)
 
     if isUpdatedRequired or forceUpdate then
         S7Debug:HFPrint("Updating " .. IDENTIFIER .. ": " .. ParseVersion(oldVersion, "string") .. " --> " .. ParseVersion(newVersion, "string"))
-        Notifications:Log(Color:Gold('TakeNotes') .. " updated to v" .. ParseVersion(newVersion, 'string'))
         --  ===============
         --  DO UPDATE STUFF
         --  ===============
