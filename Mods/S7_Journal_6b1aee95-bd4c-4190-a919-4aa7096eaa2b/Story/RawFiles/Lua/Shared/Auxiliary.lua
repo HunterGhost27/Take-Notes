@@ -15,7 +15,6 @@ ValidString = UCL.ValidString
 Color = UCL.Color
 Integrate = UCL.Integrate
 Rematerialize = UCL.Rematerialize
-Notifications = UCL.Notifications
 S7Debug = UCL.S7Debug
 Destringify = UCL.Destringify
 LoadFile = UCL.LoadFile
