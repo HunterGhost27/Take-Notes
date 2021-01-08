@@ -31,30 +31,6 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 
 >NOTE: The notebook contents are _saved_ when the UI is closed. So make sure to close it when you're done. This is especially important to keep in mind if you use multiple notebooks. Opening a different notebook when the UI is open will cause the contents to get mixed-up. Just close the first one before you open the next.
 
-## ModSettings
-
-Players can change mod-settings by editing the global settings file (`S7Central.json`) in the `Osiris Data` folder. (`..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json`). The internal identifier for the mod is `S7_Journal`.
-
-### Uniques
-
-The `Uniques` option is for people who want access to these notebooks from the very beginning. However only one will spawn per player character.
-
-* if **`Uniques`** is set to true, each player will be granted one unique notebook when the game starts. They will not spawn as loot or treasure however. (Default: `false`)
-
-### Storage
-
-Storage mode dictates how the contents of the notebooks are saved.
-
-* **`Internal`** storage mode saves the contents of the notebooks in the save-file itself. Notebook contents will be a part of your save. (Default)
-* **`External`** storage mode saves the contents of the notebooks in an external json file in `Osiris Data`. This allows you to edit them outside the game. 
-
-### SyncTo
-
-Notebook contents can be saved on a per-character or per-item basis.
-
-* **`CharacterGUID`**: If saved on a per-character basis, each character will have a unique notebook. Opening any notebook item will always open the one associated to them.
-* **`ItemGUID`**: When synced on a per-item basis, each notebook will hold its own content. (Default)
-
 ----------
 
 ## Thanks and Credits
