@@ -7,11 +7,18 @@
 ### Take Notes
 - Mod Version: ?TakeNotesVersion
 - Author: ?TakeNotesAuthor
+- Description ?TakeNotesDescription
 
 ### UI Components Library
 - Requirement: Critical
 - ModVersion: ?UCLVersion
 - Author: ?UCLAuthor
+- Description: ?UCLDescription
+
+### Mod Settings
+- Unique Notebooks: ?UniquesOption
+- Storage Mode: ?StorageOption
+- Sync Mode: ?SyncOption
 
 ## <font color='#5998C5'>General Information</font>
 ---------------------------------------------------
@@ -37,7 +44,15 @@
 ------------------------------------------------------
 
 ### Console-Commands
-- To be documented
+- `!S7_Journal AddJournal`: Adds a notebook to the host's inventory.
+- <break>
+- `!S7_Journal ListPersistentJournals`: Prints a list of tracked notebook entries in `PersistentVars`.
+- <break>
+- `!S7_Journal ExportPersistentVars <fileName|all>`: Exports `<fileName|all>` persistent entry to `Osiris Data`.
+- <break>
+- `!S7_Journal ImportFromOsirisData <fileName>`: Imports `<fileName>` from `Osiris Data` into `PersistentVars`.
+- <break>
+- `!S7_Journal RemoveJournalData <fileName|all>`: Removes `<fileName|all>` entries from `PersistentVars`.
 
 ### <font color='#C17817'>Limitations</font>
 - All notebooks share the same `JournalUI`. The contents are loaded in when you open the item and are saved when you close the UI. Opening a notebook when the UI is already opened will cause the new content to load **over** the last (without the opportunity to save). This is problematic as closing the UI now will save jumbled contents. In such an event, it may be wise to load a previous save (if content-storage is _Internal_) or `Ctrl+Z` your way out (if content-storage is _External_). <font color='#E03616'>You can avoid this situation altogether if you just close the UI before you open the next notebook</font>.
