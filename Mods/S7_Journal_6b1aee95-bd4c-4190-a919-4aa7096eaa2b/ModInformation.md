@@ -47,7 +47,7 @@
 - You can do some basic formatting using `markdown` syntax. Most of them just add *colors* `like` **this**.
 - Avoid using HTML tags directly in the in-game UI. They are not parsed correctly by `textInputs`. Using tags in the `External` files seems fine. 
 - ===
-- Entries can be left completely blank if they just contain ***===***. Like the line above.
+- Entries can be left completely blank if they just contain 3 ***=***. Like the line above.
 
 ### Editing Externally
 - If you enable the `External` storage mode, then notebooks will be saved as *markdown* files in `Osiris Data/TakeNotes/` folder.
