@@ -8,7 +8,7 @@ Ext.RegisterListener('SessionLoaded', function()
     --  ===================
 
     local fileList = LoadFile(SubdirectoryPrefix .."fileList.json")
-    if type(fileList) ~= 'table' then return end 
+    if type(fileList) ~= 'table' then return end
     for _, fileName in pairs(fileList) do
         if fileName:match(".json") then
             local file = LoadFile(SubdirectoryPrefix .. fileName)
@@ -35,12 +35,14 @@ Ext.RegisterListener('SessionLoaded', function()
     --  RESAVE EXTERNAL FILES
     --  =====================
 
-    for _, fileName in pairs(fileList) do
+    for pos, fileName in pairs(fileList) do
         local newFileName = fileName:sub(0, -5) .. "md"
         if PersistentVars.JournalData[newFileName] then
             SaveFile(SubdirectoryPrefix .. newFileName, PersistentVars.JournalData[newFileName])
             PersistentVars.JournalData[newFileName] = nil
             S7Debug:FWarn("Resaving " .. fileName .. " as " .. newFileName)
         end
+        fileList[pos] = nil
+        SaveFile(SubdirectoryPrefix .. "fileList.json", fileList)
     end
 end)
