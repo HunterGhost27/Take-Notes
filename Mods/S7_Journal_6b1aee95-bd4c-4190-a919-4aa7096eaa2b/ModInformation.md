@@ -43,6 +43,12 @@
 ## Additional Information
 --------------------------
 
+### Formatting Tips
+- You can do some basic formatting using `markdown` syntax. Most of them just add *colors* `like` **this**.
+- Avoid using HTML tags directly in the in-game UI. They are not parsed correctly by `textInputs`. Using tags in the `External` files seems fine. 
+- ===
+- Entries can be left completely blank if they just contain ***===***. Like the line above.
+
 ### Editing Externally
 - If you enable the `External` storage mode, then notebooks will be saved as *markdown* files in `Osiris Data/TakeNotes/` folder.
 - ===
@@ -51,7 +57,7 @@
 - ***###*** for a chapter within the category
 - ***-*** for a paragraph within the chapter
 - ===
-- The mod originally saved this data in a `json` format. If you still have old externally-saved journal-data that you'd like to port over, you will have to create a `fileList.json` file in **Osiris Data**. This will allow the patcher to convert those `json` files into newer `md` files. You can delete all `json` files once they've been patched.
+- The mod originally saved this data in a `json` format. If you still have old externally-saved journal-data that you'd like to port over, you will have to create a `fileList.json` file in **Osiris Data/TakeNotes/**. This will allow the patcher to convert those `json` files into newer `md` files. You can delete all `json` files once they've been patched.
 - The `fileList.json` will look something like: `["file1.json", "file2.json"]`
 
 ### Known Issues
