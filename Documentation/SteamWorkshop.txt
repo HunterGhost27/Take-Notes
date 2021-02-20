@@ -15,7 +15,7 @@ Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]cha
 [*]Maintain your own personal [b]Journal[/b].
 [*]The mod adds [b]editable notebooks[/b] to [b]Story[/b] and [b]GM modes[/b].
 [*][i]Notebooks[/i] have been integrated into vanilla [i]treasure-tables[/i]. They will appear as [b]loot[/b] and you can buy them from traders.
-[*][i]Notebooks[/i] can also be [b]crafted[/b]. [code]LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper[/code]
+[*][i]Notebooks[/i] can also be [b]crafted[/b]. [code]LeatherScraps + Needle-&-Thread + Sheet-of-Paper + Sheet-of-Paper + Sheet-of-Paper[/code]
 [*][i]Create[/i], [i]View[/i], and [i]Edit[/i] your entries from an in-game UI.
 [*]Notebook contents can be saved on a [i]per-character[/i] or [i]per-item basis[/i].
 [*]The [i]Gold Value[/i] of notebooks scales with their contents.
@@ -29,5 +29,4 @@ Editable notebooks! Take [i]notes[/i], keep a record of [i]events[/i] and [i]cha
 [*][url=http://store.steampowered.com/app/435150/Divinity_Original_Sin_2/][b]Divinity: Original Sin 2[/b][/url], a game by [b][url=http://larian.com/]Larian Studios[/url][/b].
 [*][b]LaughingLeader[/b] for the [b][url=https://github.com/LaughingLeader/SourceControlGenerator]Source Control Generator[/url][/b].
 [*][b]Norbyte[/b] for The [b][url=https://github.com/Norbyte/ositools]Script-Extender[/url][/b].
-[*][b]Sebastian Lenz[/b] and [b]LaughingLeader[/b] for the [b][url=https://marketplace.visualstudio.com/items?itemName=sebastian-lenz.divinity-vsb]VSCode extension[/url][/b].
 [/list]
