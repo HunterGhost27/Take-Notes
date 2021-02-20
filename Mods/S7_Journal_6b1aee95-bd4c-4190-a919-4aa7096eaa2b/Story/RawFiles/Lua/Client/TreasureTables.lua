@@ -25,7 +25,7 @@ Ext.RegisterListener("StatsLoaded", function()
             }
         }
         Ext.UpdateTreasureCategory("I_BOOK_S7_JournalStat", treasureCat)
-        S7Debug:Print("Created Treasure Category for Notebooks")
+        Debug:Print("Created Treasure Category for Notebooks")
 
         local targetTreasureTables = {
             "ST_IngredientsTrader",
@@ -63,7 +63,7 @@ Ext.RegisterListener("StatsLoaded", function()
                 ["TotalCount"] = 1
             }
             Ext.UpdateTreasureTable(treasure)
-            S7Debug:Print("Added Notebooks to treasure-table: " .. target)
+            Debug:Print("Added Notebooks to treasure-table: " .. target)
         end
     end
 end)

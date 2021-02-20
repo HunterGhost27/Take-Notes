@@ -66,11 +66,11 @@ S7Journal = Journal:New()
 --- Load Journal
 ---@param fileName string
 local function LoadJournal(fileName)
-    S7Debug:Print("Loading Journal File: " .. fileName)
+    Debug:Print("Loading Journal File: " .. fileName)
     local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
     file = UCL.Journalify(file)
     S7Journal = Journal:New(file)
-    S7Debug:Print("Loaded Successfully")
+    Debug:Print("Loaded Successfully")
 end
 
 --  ============
@@ -83,10 +83,10 @@ end
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
-        S7Debug:Print("Saving Journal File: " .. journal.fileName)
+        Debug:Print("Saving Journal File: " .. journal.fileName)
         if PersistentVars.Settings.Storage == "External" then SaveFile(journal.fileName, journal.Data)
         elseif PersistentVars.Settings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
-        S7Debug:Print("Saved Successfully")
+        Debug:Print("Saved Successfully")
     end
 end)
 
@@ -101,9 +101,9 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
         if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
-        S7Debug:Print(character .. " opened Journal")
+        Debug:Print(character .. " opened Journal")
 
-        local fileName = PersistentVars.Settings.Storage == "External" and SubdirectoryPrefix or ""
+        local fileName = PersistentVars.Settings.Storage == "External" and MODINFO.SubdirPrefix or ""
         if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".md"
         elseif PersistentVars.Settings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".md" end
 

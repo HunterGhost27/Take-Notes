@@ -5,7 +5,7 @@
 UCL.ContextMenu:Register({
     ["RootTemplate::" .. JournalTemplate] = {
         {
-            ['actionID'] = 27001,
+            ['actionID'] = 27501,
             ['clickSound'] = true,
             ['text'] = Color:Blue("Mod Information"),
             ['isDisabled'] = false,
@@ -14,19 +14,17 @@ UCL.ContextMenu:Register({
     }
 })
 
-
-
 Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
     local payload = Ext.JsonParse(payload) or {}
     Destringify(payload)
-    if payload.actionID == 27001 then
+    if payload.actionID == 27501 then
         local manual = LoadFile("Mods/S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b/ModInformation.md", "data")
 
         local replacers = {
-            {["?TakeNotesVersion"] = ParseVersion(ModInfo.Version, 'string')},
-            {["?TakeNotesAuthor"] = ModInfo.Author},
-            {["?TakeNotesDescription"] = ModInfo.Description},
-            {["?UCLVersion"] = ParseVersion(UCL.ModInfo.Version, 'string')},
+            {["?TakeNotesVersion"] = Version:Parse(MODINFO.Version):ToString()},
+            {["?TakeNotesAuthor"] = MODINFO.Author},
+            {["?TakeNotesDescription"] = MODINFO.Description},
+            {["?UCLVersion"] = Version:Parse(UCL.ModInfo.Version, 'string')},
             {["?UCLAuthor"] = UCL.ModInfo.Author},
             {["?UCLDescription"] = UCL.ModInfo.Description},
             {["?UniquesOption"] = tostring(PersistentVars.Settings.Uniques)},

@@ -8,7 +8,7 @@
 --- Add Journal to HostCharacter
 local function addJournal()
     Osi.ItemTemplateAddTo(JournalTemplate, Osi.CharacterGetHostCharacter(), 1, 1)
-    S7Debug:Print("BOOK_S7_Notebook added to host's inventory")
+    Debug:Print("BOOK_S7_Notebook added to host's inventory")
 end
 
 --  LIST PERSISTENT JOURNALS
@@ -16,7 +16,7 @@ end
 
 --- List Journal entries in PersistentVars
 local function listPersistentJournals()
-    if PersistentVars.JournalData then for fileName, _ in pairs(PersistentVars.JournalData) do S7Debug:Print(fileName) end end
+    if PersistentVars.JournalData then for fileName, _ in pairs(PersistentVars.JournalData) do Debug:Print(fileName) end end
 end
 
 --  EXPORT PERSISTENT JOURNALS
@@ -29,14 +29,14 @@ local function exportPersistentJournals(param)
     if PersistentVars.JournalData then
         if string.lower(param) == "all" then
             for fileName, contents in pairs(PersistentVars.JournalData) do
-                SaveFile(SubdirectoryPrefix .. tostring(fileName), contents)
-                S7Debug:Print("Exported: " .. tostring(fileName))
+                SaveFile(MODINFO.SubdirPrefix .. tostring(fileName), contents)
+                Debug:Print("Exported: " .. tostring(fileName))
             end
         elseif PersistentVars.JournalData[param] then
-            SaveFile(SubdirectoryPrefix .. tostring(param), PersistentVars.JournalData[param])
-            S7Debug:Print("Exported: " .. tostring(param))
-        else S7Debug:Warn("No match found: " .. tostring(param)) end
-    else S7Debug:Warn("No entries in PersistentVars") end
+            SaveFile(MODINFO.SubdirPrefix .. tostring(param), PersistentVars.JournalData[param])
+            Debug:Print("Exported: " .. tostring(param))
+        else Debug:Warn("No match found: " .. tostring(param)) end
+    else Debug:Warn("No entries in PersistentVars") end
 end
 
 --  IMPORT TO PERSISTENT JOURNALS
@@ -45,11 +45,11 @@ end
 --- Import file from OsirisData into PersistentVars
 ---@param param string fileName
 local function importFromOsirisData(param)
-    local file = LoadFile(SubdirectoryPrefix .. tostring(param))
+    local file = LoadFile(MODINFO.SubdirPrefix .. tostring(param))
     if file then
         PersistentVars.JournalData[tostring(param)] = file
-        S7Debug:Print("Imported from OsirisData: " .. tostring(param))
-    else S7Debug:Error("Could not import file: " .. tostring(param)) end
+        Debug:Print("Imported from OsirisData: " .. tostring(param))
+    else Debug:Error("Could not import file: " .. tostring(param)) end
 end
 
 --  REMOVE JOURNAL DATA
@@ -60,11 +60,11 @@ end
 local function removeJournalData(param)
     if string.lower(tostring(param)) == "all" then
         PersistentVars.JournalData = nil
-        S7Debug:Print("Removed all entries from PersistentVars")
+        Debug:Print("Removed all entries from PersistentVars")
     elseif PersistentVars.JournalData[tostring(param)] ~= nil then
         PersistentVars.JournalData[tostring(param)] = nil
-        S7Debug:Print("Removed: " .. tostring(param))
-    else S7Debug:Error("Invalid Parameter") end
+        Debug:Print("Removed: " .. tostring(param))
+    else Debug:Error("Invalid Parameter") end
 end
 
 --  =========================

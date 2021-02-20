@@ -21,7 +21,7 @@ Notebook = {
 
 local function SaveJournal()
     if Notebook.Data.Component.Name ~= "S7_Notebook" then return end
-    S7Debug:Print("Saving " .. Notebook.Data.Component.Name)
+    Debug:Print("Saving " .. Notebook.Data.Component.Name)
     local saveData = {
         ["ID"] = "SaveJournal",
         ["fileName"] = Notebook.FileName,
@@ -38,7 +38,7 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "CharacterOpenJournal" then
         Notebook.FileName = journal.Data.fileName
-        S7Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
+        Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
         local BuildSpecs = Rematerialize(journal.Data.content)
         BuildSpecs = Integrate(BuildSpecs, {["GMJournal"] = {["Component"] = {["Listeners"] = {["Before:S7_Journal_UI_Hide"] = function(ui, call, ...) SaveJournal() end}}}})
         Notebook.Data = UCL.Render(BuildSpecs)
