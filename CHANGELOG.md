@@ -2,6 +2,12 @@
 
 ----------
 
+## [1.1.1.0] --- 21st February 2021 --- **_AuxFunctions_**
+
+### NEW
+
+* AuxFunctions Init.
+
 ## [1.1.0.0] --- 2nd January 2021 --- **_ContextMenu_**
 
 ### NEW

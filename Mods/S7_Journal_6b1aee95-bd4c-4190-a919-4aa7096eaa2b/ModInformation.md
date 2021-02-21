@@ -72,6 +72,9 @@
 ## <font color='#3F784C'>Changelog</font>
 -----------------------------------------
 
+## [v1.1.1.0]<font color='#888888'>: 9-Jan-2021</font>
+- *Refactored* Auxiliary Functions.
+
 ### [v1.1.0.0]<font color='#888888'>: 9-Jan-2021</font>
 - The **Gold Value** of notebooks now scales with the contents.
 - The mod now stores and reads notebooks as `markdown` files.
