@@ -7,9 +7,9 @@
 ### Take Notes
 - Mod Version:  ?TakeNotesVersion
 - Author:  ?TakeNotesAuthor
-- Description:  **Editable notebooks** for story and GM modes! Take _notes_, keep a record of _events_ and _characters_, and write about your _deeds_ (or misdeeds) as you adventure through Rivellon. _Create_, _View_, _Edit_ your entries in-game or externally.
+- Description:  **Editable notebooks** for *story* and *GM modes*! Take notes, keep a record of events and characters, and write about your deeds (or misdeeds) as you adventure through Rivellon. *Create*, *View*, *Edit* your entries in-game or externally.
 - ===
-- CURRENT MOD SETTINGS
+- ***CURRENT MOD SETTINGS***
 - Unique Notebooks:  `?UniquesOption`
 - Storage Mode:  `?StorageOption`
 - Sync Mode:  `?SyncOption`
@@ -23,13 +23,13 @@
 -----------------------
 
 ### How to use?
-- Just find and open a **notebook**, enable `edit-mode` and start writing. The contents will be automatically *saved* when you close the UI.
+- Just find and open a **notebook**, enable `edit-mode` and start writing. The contents will be automatically saved when you close the UI.
 - The notebook's **title** can also be edited!
 
 ### How to acquire?
-- Notebooks have been _integrated_ into vanilla **treasure-tables**. You can buy them off vendors and find them as loot.
+- Notebooks have been integrated into vanilla **treasure-tables**. You can buy them off vendors and find them as loot.
 - Notebooks can also be crafted: `LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper`
-- If you've set the `Uniques` option, each player will get 1 notebook as soon as the game loads. But they won't be a part of _treasure-tables_ anymore.
+- If you've set the `Uniques` option, each player will get 1 notebook as soon as the game loads. But they won't be a part of *treasure-tables* anymore.
 
 ### Mod Settings
 - ModSettings can be changed by editing the global settings file (`S7Central.json`) in the *Osiris Data* folder. (`..\Documents\Larian Studios\Divinity Original Sin 2 Definitive Edition\Osiris Data\S7Central.json`). Search for **S7_Journal**, the internal identifier for the mod.
@@ -56,12 +56,10 @@
 - ***##*** for a category
 - ***###*** for a chapter within the category
 - ***-*** for a paragraph within the chapter
-- ===
-- The mod originally saved this data in a `json` format. If you still have old externally-saved journal-data that you'd like to port over, you will have to create a `fileList.json` file in **Osiris Data/TakeNotes/**. This will allow the patcher to convert those `json` files into newer `md` files. You can delete all `json` files once they've been patched.
-- The `fileList.json` will look something like: `["file1.json", "file2.json"]`
 
 ### Known Issues
 - All notebooks share the same `Journal UI`. The contents are loaded in when you open the item and are saved when you close the UI. Opening a notebook when the UI is already opened will cause the new content to load **over** the last (without the opportunity to save).
+- ===
 - This is problematic as closing the UI now will save jumbled contents. In such an event, it may be wise to load a previous save (if content-storage is _Internal_) or `Ctrl+Z` your way out (if content-storage is _External_).
 - <font color='#E03616'>You can avoid this situation altogether if you just close the UI before you open the next notebook</font>.
 - ===
