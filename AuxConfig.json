@@ -1,0 +1,10 @@
+{
+  "ProjectName": "S7_Journal",
+  "ProjectUUID": "6b1aee95-bd4c-4190-a919-4aa7096eaa2b",
+  "ScriptExtenderVersion": 52,
+  "SEFeatureFlags": [
+    "OsirisExtensions",
+    "Lua"
+  ],
+  "ProjectDirectory": "S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b"
+}
