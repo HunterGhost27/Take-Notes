@@ -2,7 +2,7 @@
 --  IMPORT
 --  ======
 
-Ext.Require("Shared/Auxiliary.lua")
+Ext.Require("Auxiliary.lua")
 if Ext.IsDeveloperMode() then Ext.Require("Server/Development/DevMode.lua") end
 
 --  =================
@@ -67,7 +67,7 @@ S7Journal = Journal:New()
 ---@param fileName string
 local function LoadJournal(fileName)
     Debug:Print("Loading Journal File: " .. fileName)
-    local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
+    local file = MODINFO.ModSettings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
     file = UCL.Journalify(file)
     S7Journal = Journal:New(file)
     Debug:Print("Loaded Successfully")
@@ -84,8 +84,8 @@ Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "SaveJournal" then
         Debug:Print("Saving Journal File: " .. journal.fileName)
-        if PersistentVars.Settings.Storage == "External" then SaveFile(journal.fileName, journal.Data)
-        elseif PersistentVars.Settings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
+        if MODINFO.ModSettings.Storage == "External" then SaveFile(journal.fileName, journal.Data)
+        elseif MODINFO.ModSettings.Storage == "Internal" then PersistentVars.JournalData[journal.fileName] = Rematerialize(journal.Data) end
         Debug:Print("Saved Successfully")
     end
 end)
@@ -103,11 +103,11 @@ Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, 
         if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
         Debug:Print(character .. " opened Journal")
 
-        local fileName = PersistentVars.Settings.Storage == "External" and MODINFO.SubdirPrefix or ""
-        if PersistentVars.Settings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".md"
-        elseif PersistentVars.Settings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".md" end
+        local fileName = MODINFO.ModSettings.Storage == "External" and MODINFO.SubdirPrefix or ""
+        if MODINFO.ModSettings.SyncTo == "CharacterGUID" then fileName = fileName .. tostring(character) .. ".md"
+        elseif MODINFO.ModSettings.SyncTo == "ItemGUID" then fileName = fileName .. tostring(itemGuid) .. ".md" end
 
-        local file = PersistentVars.Settings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
+        local file = MODINFO.ModSettings.Storage == "External" and LoadFile(fileName) or PersistentVars.JournalData[fileName] or ""
         local len = string.len(file)
         item.GoldValueOverwrite = Ext.StatGetAttribute(item.StatsId, "Value") + math.floor(len/3)
         LoadJournal(fileName)

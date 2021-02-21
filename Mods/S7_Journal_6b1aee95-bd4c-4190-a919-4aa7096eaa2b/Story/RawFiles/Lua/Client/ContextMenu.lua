@@ -21,15 +21,15 @@ Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
         local manual = LoadFile("Mods/S7_Journal_6b1aee95-bd4c-4190-a919-4aa7096eaa2b/ModInformation.md", "data")
 
         local replacers = {
-            {["?TakeNotesVersion"] = Version:Parse(MODINFO.Version):ToString()},
+            {["?TakeNotesVersion"] = Version:Parse(MODINFO.Version):String()},
             {["?TakeNotesAuthor"] = MODINFO.Author},
             {["?TakeNotesDescription"] = MODINFO.Description},
-            {["?UCLVersion"] = Version:Parse(UCL.ModInfo.Version, 'string')},
-            {["?UCLAuthor"] = UCL.ModInfo.Author},
-            {["?UCLDescription"] = UCL.ModInfo.Description},
-            {["?UniquesOption"] = tostring(PersistentVars.Settings.Uniques)},
-            {["?StorageOption"] = tostring(PersistentVars.Settings.Storage)},
-            {["?SyncOption"] = tostring(PersistentVars.Settings.SyncTo)}
+            {["?UCLVersion"] = Version:Parse(UCL.MODINFO.Version):String()},
+            {["?UCLAuthor"] = UCL.MODINFO.Author},
+            {["?UCLDescription"] = UCL.MODINFO.Description},
+            {["?UniquesOption"] = tostring(MODINFO.ModSettings.Uniques)},
+            {["?StorageOption"] = tostring(MODINFO.ModSettings.Storage)},
+            {["?SyncOption"] = tostring(MODINFO.ModSettings.SyncTo)}
         }
 
         local specs = UCL.Journalify(manual, replacers)

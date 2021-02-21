@@ -78,7 +78,6 @@ end
 Ext.RegisterConsoleCommand(IDENTIFIER, function (cmd, command, ...)
     local args = {...}
     if command == "AddJournal" then addJournal() end
-    if command == "ResyncSettings" then ResynchronizeModSettings() end
     if command == "ListPersistentJournals" then listPersistentJournals() end
     if command == "ExportPersistentJournals" then exportPersistentJournals(args[1]) end
     if command == "ImportFromOsirisData" then importFromOsirisData(args[1]) end
