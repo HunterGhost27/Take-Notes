@@ -3,7 +3,7 @@
 --  ======
 
 Ext.Require('Auxiliary.lua')
-Ext.Require('Server/ConsoleCommander.lua')
+Ext.Require('Server/ConsoleCommands.lua')
 
 --  =================
 --  GAME START EVENTS
