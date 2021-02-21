@@ -2,8 +2,8 @@
 --  IMPORT
 --  ======
 
-Ext.Require("Auxiliary.lua")
-if Ext.IsDeveloperMode() then Ext.Require("Server/Development/DevMode.lua") end
+Ext.Require('Auxiliary.lua')
+Ext.Require('Server/ConsoleCommander.lua')
 
 --  =================
 --  GAME START EVENTS
@@ -11,7 +11,7 @@ if Ext.IsDeveloperMode() then Ext.Require("Server/Development/DevMode.lua") end
 
 Ext.RegisterOsirisListener("GameStarted", 2, "after", function(level, isEditorMode)
     if Osi.IsGameLevel(level) then
-        if CENTRAL[IDENTIFIER].ModSettings.Uniques then
+        if MODINFO.ModSettings.Uniques then
             local db = Osi.DB_IsPlayer:Get(nil)[1] or {}
             for _, player in pairs(db) do
                 if Osi.ItemTemplateIsInCharacterInventory(player, JournalTemplate) < 1 then
@@ -100,7 +100,7 @@ end)
 Ext.RegisterOsirisListener("CharacterUsedItem", 2, "after", function(character, itemGuid)
     local item = Ext.GetItem(itemGuid)
     if item.RootTemplate.Id == JournalTemplate then
-        if CENTRAL[IDENTIFIER].ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
+        if MODINFO.ModSettings.Uniques then item.StoryItem = true else item.StoryItem = false end
         Debug:Print(character .. " opened Journal")
 
         local fileName = MODINFO.ModSettings.Storage == "External" and MODINFO.SubdirPrefix or ""
