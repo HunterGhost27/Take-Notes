@@ -21,7 +21,7 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 * Maintain your own personal **Journal**.
 * The mod adds **editable notebooks** to **Story** and **GM modes**.
 * _Notebooks_ have been integrated into vanilla _treasure-tables_. They will appear as **loot** and you can buy them from traders.
-* _Notebooks_ can also be **crafted**. `LeatherScraps + Needle-&-Thread + 3x Sheet-of-Paper`
+* _Notebooks_ can also be **crafted**. `LeatherScraps + Needle-&-Thread + Sheet-of-Paper + Sheet-of-Paper + Sheet-of-Paper`
 * _Create_, _View_, and _Edit_ your entries from an in-game UI or externally as markdown.
 * Notebook contents can be saved on a _per-character_ or _per-item basis_.
 * The _Gold Value_ of notebooks scales with their contents.
@@ -38,4 +38,3 @@ Editable notebooks! Take _notes_, keep a record of _events_ and _characters_, an
 * [**Divinity: Original Sin 2**](http://store.steampowered.com/app/435150/Divinity_Original_Sin_2/), a game by **[Larian Studios](http://larian.com/)**.
 * **LaughingLeader** for the **[Source Control Generator](https://github.com/LaughingLeader/SourceControlGenerator)**.
 * **Norbyte** for The **[Script-Extender](https://github.com/Norbyte/ositools)**.
-* **Sebastian Lenz** and **LaughingLeader** for the **[VSCode extension](https://marketplace.visualstudio.com/items?itemName=sebastian-lenz.divinity-vscode)**.
