@@ -72,7 +72,7 @@
 ## <font color='#3F784C'>Changelog</font>
 -----------------------------------------
 
-## [v1.1.1.0]<font color='#888888'>: 9-Jan-2021</font>
+## [v1.1.1.0]<font color='#888888'>: 21-Feb-2021</font>
 - *Refactored* Auxiliary Functions.
 
 ### [v1.1.0.0]<font color='#888888'>: 9-Jan-2021</font>
