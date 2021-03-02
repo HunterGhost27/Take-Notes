@@ -37,6 +37,7 @@ end
 Ext.RegisterNetListener(IDENTIFIER, function (channel, payload)
     local journal = Ext.JsonParse(payload)
     if journal.ID == "CharacterOpenJournal" then
+        if UCL.Journal.Exists then return end
         Notebook.FileName = journal.Data.fileName
         Debug:Print("Dispatching BuildSpecs to UI-Components-Library")
         local BuildSpecs = Rematerialize(journal.Data.content)
