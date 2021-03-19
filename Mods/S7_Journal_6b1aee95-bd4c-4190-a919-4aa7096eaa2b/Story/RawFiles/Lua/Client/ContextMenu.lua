@@ -2,17 +2,20 @@
 --  CONTEXT MENU
 --  ============
 
-UCL.ContextMenu:Register({
-    ["RootTemplate::" .. JournalTemplate] = {
-        {
-            ['actionID'] = 27501,
-            ['clickSound'] = true,
-            ['text'] = Color:Blue("Mod Information"),
-            ['isDisabled'] = false,
-            ['isLegal'] = true
-        }
-    }
-})
+Ext.RegisterListener('SessionLoaded', function ()
+    local activator = "RootTemplate::" .. JournalTemplate
+    local ctxMenu = UCL.ContextMenu:Get(activator) or {}
+
+    table.insert(ctxMenu, {
+        ['actionID'] = 27501,
+        ['clickSound'] = true,
+        ['text'] = Color:Blue("Mod Information"),
+        ['isDisabled'] = false,
+        ['isLegal'] = true
+    })
+
+    UCL.ContextMenu:Register({ [activator] = ctxMenu })
+end)
 
 Ext.RegisterNetListener("S7UCL::ContextMenu", function (channel, payload)
     local payload = Ext.JsonParse(payload) or {}
