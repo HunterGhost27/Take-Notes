@@ -3,7 +3,7 @@
 --  ============
 
 Ext.RegisterListener('SessionLoaded', function ()
-    UCL.ContextMenu:QuickRegister({
+    UCL.ContextMenu:Register({
         ["RootTemplate::" .. JournalTemplate] = {
             {
                 ['actionID'] = 27501,
