@@ -26,6 +26,7 @@ if Ext.IsServer() then
     Ext.Require('AuxFunctions/Server/Networker.lua')
     Ext.Require('AuxFunctions/Server/FlagsManager.lua')
     Ext.Require('AuxFunctions/Server/DialogManager.lua')
+    Ext.Require('AuxFunctions/Server/Timer.lua')
     -- Ext.Require('AuxFunctions/Server/DynamicDialog.lua') --  ⚠ Work-in-Progress
 end
 
@@ -34,6 +35,7 @@ end
 
 if Ext.IsClient() then
     Ext.Require('AuxFunctions/Client/Networker.lua')
+    Ext.Require('AuxFunctions/Client/Timer.lua')
 end
 
 --  LATE LOADER
